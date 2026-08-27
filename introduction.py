@@ -1,6 +1,7 @@
 """A program introducing myself."""
 import time
 
+
 class EscapeSequences:
     """Enumerated ANSI escape sequences.
 
@@ -26,7 +27,37 @@ class EscapeSequences:
     BOLDWHITE = "\033[1m\033[37m"  # Bold White
 
 class EmojiUnicodes:
-    pass
+    blood = '1FA78'
+    clock = r'1F570\uFE0F'
+    programmer = '1F4BE'
+    computer = r'1F5A5\uFE0F'
+    fish = '1F3A3'
+    baseball = '26BE'
+    joystick = r'1F579\uFE0F'
+    planet = '1F30C'
+    briefcase = '1F4BC'
+
+    def __getattribute__(self, name: str, /):
+        value = super().__getattribute__(name)
+
+        if name.startswith('__'):
+            return value
+        else:
+            new_val = fill_emoji_unicode(value)
+            return new_val
+
+
+
+def fill_emoji_unicode(emoji:str):
+    split_emoji = emoji.split(r'\u')
+    padded_code = f'U{split_emoji[0]:0>8}'
+
+    if len(split_emoji) > 1:
+        padded_code = padded_code + rf'\u{split_emoji[1]}'
+
+    return padded_code
+
+
 
 
 def the_end():
@@ -38,8 +69,17 @@ def the_end():
         time.sleep(.75)
         print('')
 
-# def introduction():
-#     pass
+def introduction():
+    # Hemophilia
+    # Age
+    # Programming
+    # Major
+    # Study Interests
+    # Fishing
+    # Baseball
+    # Arcade Games
+    # Media Genres
+    # Job
 
 def main():
     for _ in range(11):
@@ -65,4 +105,8 @@ def main():
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
 if __name__ == '__main__':
-    main()
+    # main()
+    # some_code = fill_emoji_unicode(EmojiUnicodes.fish)
+    # print(some_code)
+    emoji_code = EmojiUnicodes.clock
+    print(emoji_code)
