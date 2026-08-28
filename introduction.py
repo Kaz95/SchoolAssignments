@@ -26,7 +26,19 @@ class EscapeSequences:
     BOLDCYAN = "\033[1m\033[36m"  # Bold Cyan
     BOLDWHITE = "\033[1m\033[37m"  # Bold White
 
-class EmojiUnicodes:
+# First time actually finding a solid use case for a MetaClass!
+class PadZeroMeta(type):
+    def __getattribute__(self, name: str, /):
+        value = super().__getattribute__(name)
+
+        # Block dunder methods.
+        if name.startswith('__') and name.endswith('__'):
+            return value
+        else:
+            new_val = fill_emoji_unicode(value)
+            return new_val
+
+class EmojiUnicodes(metaclass=PadZeroMeta):
     blood = '1FA78'
     clock = r'1F570\uFE0F'
     programmer = '1F4BE'
@@ -37,14 +49,9 @@ class EmojiUnicodes:
     planet = '1F30C'
     briefcase = '1F4BC'
 
-    def __getattribute__(self, name: str, /):
-        value = super().__getattribute__(name)
 
-        if name.startswith('__'):
-            return value
-        else:
-            new_val = fill_emoji_unicode(value)
-            return new_val
+
+
 
 
 
@@ -70,6 +77,7 @@ def the_end():
         print('')
 
 def introduction():
+    pass
     # Hemophilia
     # Age
     # Programming
