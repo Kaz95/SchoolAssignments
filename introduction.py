@@ -57,12 +57,16 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
 
 def fill_emoji_unicode(emoji:str):
     split_emoji = emoji.split(r'\u')
-    padded_code = f'U{split_emoji[0]:0>8}'
+    padded_code = rf'\U{split_emoji[0]:0>8}'
+    print(padded_code)
 
     if len(split_emoji) > 1:
         padded_code = padded_code + rf'\u{split_emoji[1]}'
 
-    return padded_code
+    # Learned some cool stuff about run-time vs compilation.
+    # Need to manually decode. Dynamic string isn't available at compile time, and isn't recognized as an ANSI escape.
+    emoji = padded_code.encode('utf-8').decode('unicode_escape')
+    return emoji
 
 
 
