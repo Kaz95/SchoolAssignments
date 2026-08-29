@@ -87,6 +87,7 @@ class ColorEscapeSequences:
     there is no reason to maintain uniqueness and immutability for this small project. I decided an enum would only
     make access more verbose, with none of the normal benefits.
     """
+
     RESET = "\033[0m"
     BLACK = "\033[30m"  # Black
     RED = "\033[31m"  # Red
@@ -104,6 +105,7 @@ class ColorEscapeSequences:
     BOLDMAGENTA = "\033[1m\033[35m"  # Bold Magenta
     BOLDCYAN = "\033[1m\033[36m"  # Bold Cyan
     BOLDWHITE = "\033[1m\033[37m"  # Bold White
+    PHOSPHORGREEN = "\033[1;92m" # Bold, High-Intensity green.
 
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
