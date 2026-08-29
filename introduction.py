@@ -14,8 +14,9 @@ import shutil, time, textwrap
 
 
 
-terminal_size = shutil.get_terminal_size()
-print(terminal_size)
+terminal_width, terminal_height = shutil.get_terminal_size()
+
+
 
 class Drawing:
     """Character codes used for drawing boarders."""
