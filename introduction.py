@@ -103,7 +103,7 @@ def fill_emoji_unicode(emoji:str):
 def the_end():
     """There's a reason I'm a STEM major. This is about the extent of my artistic skills."""
     print(' ' + '-' * 20 + ' ')
-    print('|' + ' ' * 7 + f"{EscapeSequences.RED}THE END{EscapeSequences.RESET}" +  ' ' * 7 + '|')
+    print(full_block + ' ' * 7 + f"{EscapeSequences.RED}THE END{EscapeSequences.RESET}" +  ' ' * 7 + full_block)
     print(' ' + '-' * 20 + ' ')
     for _ in range(31):
         time.sleep(.75)
@@ -124,7 +124,7 @@ def introduction():
 
 def main():
     for _ in range(11):
-        print('Something about be and stuff, Something about be and stuff, Something about be and stuff, ')
+        print(textwrap.fill('Something about me and stuff' * 10, width=80))
 
     first_pass = True
     while True:
@@ -146,7 +146,7 @@ def main():
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
 if __name__ == '__main__':
-    # main()
+    main()
     # some_code = fill_emoji_unicode(EmojiUnicodes.fish)
     # print(some_code)
     emoji_code = EmojiUnicodes.clock
