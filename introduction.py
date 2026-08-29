@@ -41,6 +41,22 @@ class EscapeSequences:
 
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
+    # Trying to add this to class or references just about any way other than class level static method causes recursion
+    # I mostly understand why, but I need to look into it more. TODO: Fully understand class lookup.
+    @staticmethod
+    def fill_emoji_unicode(emoji: str):
+        split_emoji = emoji.split(r'\u')
+        padded_code = rf'\U{split_emoji[0]:0>8}'
+        print(padded_code)
+
+        if len(split_emoji) > 1:
+            padded_code = padded_code + rf'\u{split_emoji[1]}'
+
+        # Learned some cool stuff about run-time vs compilation.
+        # Need to manually decode. Dynamic string isn't available at compile time, and isn't recognized as an ANSI escape.
+        emoji = padded_code.encode('utf-8').decode('unicode_escape')
+        return emoji
+
     def __getattribute__(self, name: str, /):
         value = super().__getattribute__(name)
 
@@ -48,7 +64,7 @@ class PadZeroMeta(type):
         if name.startswith('__') and name.endswith('__'):
             return value
         else:
-            new_val = fill_emoji_unicode(value)
+            new_val = PadZeroMeta.fill_emoji_unicode(value)
             return new_val
 
 class EmojiUnicodes(metaclass=PadZeroMeta):
