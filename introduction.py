@@ -1,5 +1,17 @@
-"""A program introducing myself."""
-import time
+"""A program introducing myself.
+
+TODO:
+    * Fill out docstrings
+    * Come up with a better git workflow. Squashing conflicts too often working from laptop.
+    * Write 10 print statements.
+    * Improve end 'animation'. Maybe use Unicode 'blocks'
+"""
+import shutil, time, textwrap
+
+
+
+terminal_size = shutil.get_terminal_size()
+print(terminal_size)
 
 
 class EscapeSequences:
