@@ -36,9 +36,26 @@ class Drawing:
         """
         pass
 
-    def print_character_sprite(self, character):
+    @staticmethod
+    def print_character_sprite(word):
         """Draw character sprite base on given sprite data."""
-        pass
+        # Need to double up to maintain square aspect ratio
+        full_block = Drawing.half_block * 2
+        double_space = "  "
+
+        sprite_word = []
+        for char in word:
+            sprite_word.append(character_sprites[char])
+
+        for _ in range(5):
+            row_string = ''
+            for char in sprite_word:
+                row = f'{char[_]:05b}'
+                graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
+                row_string += graphic_row
+            row_string = row_string.center(terminal_width)
+            print('\u2B24', row_string, '\u2B24')
+            time.sleep(1)
 
     def draw_boarded_text(self, text):
         """Draw boarders around given text. May want to add dimension customization later.
@@ -173,8 +190,11 @@ def main():
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
 if __name__ == '__main__':
-    main()
+    # main()
     # some_code = fill_emoji_unicode(EmojiUnicodes.fish)
     # print(some_code)
-    emoji_code = EmojiUnicodes.clock
-    print(emoji_code)
+    # emoji_code = EmojiUnicodes.clock
+    # print(emoji_code)
+    Drawing.print_character_sprite('intro.py')
+    print('')
+    Drawing.print_character_sprite('The end')
