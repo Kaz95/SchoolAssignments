@@ -17,8 +17,9 @@ print(terminal_size)
 class EscapeSequences:
     """Enumerated ANSI escape sequences.
 
-    I wasn't sure if using the standard library was OK, so I didn't use the enum builtin library. I would almost always
-    handle data of this type with an enumeration to maintain uniqueness and prevent mutability.
+    I wasn't sure if I wanted to use the actual enum module or not. This type of data is a perfect fit for an enum, but
+    there is no reason to maintain uniqueness and immutability for this small project. I decided an enum would only
+    make access more verbose, with none of the normal benefits.
     """
     RESET = "\033[0m"
     BLACK = "\033[30m"  # Black
