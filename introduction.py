@@ -1,6 +1,11 @@
 """A program introducing myself.
 
 TODO:
+    * Sketch a quick overview of overall program flow.
+    * Create data for limited sprite set (INTRO & THE END)
+    * Write prototype sprite drawing logic
+    * Write prototype boarder drawing logic
+    * Write prototype 'Journal' entry boarder logic
     * Fill out docstrings
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
     * Write 10 print statements.
