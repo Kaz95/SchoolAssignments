@@ -26,9 +26,7 @@ class Drawing:
     bottom_right = "\u2518"  # ┘
     horiz = "\u2500"  # ─
     vert = "\u2502"  # │
-    top_block = "\u2580"  # ▀
-    bottom_block = "\u2584"  # ▄
-    side_block = "\u2588"  # █
+    half_block = "\u2588"  # █
 
     def __init__(self):
         """I don't think I'll end up needing an init, as I won't be using instances.
