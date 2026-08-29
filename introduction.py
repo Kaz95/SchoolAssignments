@@ -18,8 +18,42 @@ import shutil, time, textwrap
 terminal_size = shutil.get_terminal_size()
 print(terminal_size)
 
+class Drawing:
+    """Character codes used for drawing boarders."""
+    top_left = "\u250c"  # ┌
+    top_right = "\u2510"  # ┐
+    bottom_left = "\u2514"  # └
+    bottom_right = "\u2518"  # ┘
+    horiz = "\u2500"  # ─
+    vert = "\u2502"  # │
+    top_block = "\u2580"  # ▀
+    bottom_block = "\u2584"  # ▄
+    side_block = "\u2588"  # █
 
-class EscapeSequences:
+    def __init__(self):
+        """I don't think I'll end up needing an init, as I won't be using instances.
+
+        This is a bit of a new situation for me. I don't need to customize the class unless I want to customize some
+        aspect of drawing, and I don't think I do, currently.
+        """
+        pass
+
+    def print_character_sprite(self, character):
+        """Draw character sprite base on given sprite data."""
+        pass
+
+    def draw_boarded_text(self, text):
+        """Draw boarders around given text. May want to add dimension customization later.
+
+        In the future, I may also want to add another method that draws a large standard size boarder. So this would
+        handle small non-standard text elements, while the second method would handle a singe large standard text
+        element. Something like drawing a single journal entry.
+        """
+        pass
+
+
+
+class ColorEscapeSequences:
     """Enumerated ANSI escape sequences.
 
     I wasn't sure if I wanted to use the actual enum module or not. This type of data is a perfect fit for an enum, but
