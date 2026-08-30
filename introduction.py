@@ -160,7 +160,7 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
 def the_end():
     """There's a reason I'm a STEM major. This is about the extent of my artistic skills."""
     print(' ' + '-' * 20 + ' ')
-    print(full_block + ' ' * 7 + f"{EscapeSequences.RED}THE END{EscapeSequences.RESET}" +  ' ' * 7 + full_block)
+    print(Drawing.half_block + ' ' * 7 + f"{ColorEscapeSequences.RED}THE END{ColorEscapeSequences.RESET}" +  ' ' * 7 + Drawing.half_block)
     print(' ' + '-' * 20 + ' ')
     for _ in range(31):
         time.sleep(.75)
