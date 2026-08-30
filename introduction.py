@@ -15,7 +15,6 @@ import sys
 terminal_width, terminal_height = shutil.get_terminal_size()
 
 
-
 class Drawing:
     """Character codes used for drawing boarders."""
     top_left = "\u250c"  # ┌
@@ -26,11 +25,11 @@ class Drawing:
     vert = "\u2502"  # │
     half_block = "\u2588"  # █
 
-    @staticmethod
-    def print_character_sprite(word):
+    @classmethod
+    def print_character_sprite(cls, word):
         """Draw character sprite base on given sprite data."""
         # Need to double up to maintain square aspect ratio
-        full_block = Drawing.half_block * 2
+        full_block = cls.half_block * 2
         double_space = "  "
 
         sprite_word = []
@@ -47,32 +46,32 @@ class Drawing:
             print('\u2B24', row_string, '\u2B24')
             time.sleep(1)
 
-    @staticmethod
-    def draw_window(subject, emoji, body):
+    @classmethod
+    def draw_window(cls, subject, emoji, body):
         ootext = False
-        print(Drawing.top_left + Drawing.horiz * 78 + Drawing.top_right)
+        print(cls.top_left + cls.horiz * 78 + cls.top_right)
         for _ in range(23):
             if _ == 0:
                 subject = f'{emoji} {subject} {emoji}'
                 print(subject.center(80))
                 continue
             elif _ == 1:
-                print(Drawing.vert + Drawing.horiz * 78 + Drawing.vert)
+                print(cls.vert + cls.horiz * 78 + cls.vert)
                 continue
             elif _ == 21:
-                print(Drawing.vert + Drawing.horiz * 78 + Drawing.vert)
+                print(cls.vert + cls.horiz * 78 + cls.vert)
                 continue
             elif _ == 22:
-                print('[B]ack'.center(38) + Drawing.vert + '[N]ext'.center(38))
+                print('[B]ack'.center(38) + cls.vert + '[N]ext'.center(38))
             elif ootext:
-                print(Drawing.vert + ' ' * 78 + Drawing.vert)
+                print(cls.vert + ' ' * 78 + cls.vert)
             else:
                 try:
-                    print(Drawing.vert + f'{body[_ - 2]}' + Drawing.vert)
+                    print(cls.vert + f'{body[_ - 2]}' + cls.vert)
                 except IndexError:
                     ootext = True
 
-        print(Drawing.bottom_left + Drawing.horiz * 78 + Drawing.bottom_right)
+        print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
 
 
 character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
