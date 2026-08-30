@@ -3,9 +3,10 @@
 TODO:
     * Sketch a quick overview of overall program flow.
     * Start integration of new stuff and removal of deprecated code.
-    * Fill out docstrings
+    * Fill out docstrings.
+    * Fill out type hints.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
-    * Write 10 'Entries'
+    * Write 10 'Entries'.
 """
 import shutil, time, textwrap
 import subprocess
