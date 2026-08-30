@@ -49,14 +49,33 @@ class Drawing:
             print('\u2B24', row_string, '\u2B24')
             time.sleep(1)
 
-    def draw_boarded_text(self, text):
-        """Draw boarders around given text. May want to add dimension customization later.
+    @staticmethod
+    def draw_window(subject, emoji, body):
+        ootext = False
+        print(Drawing.top_left + Drawing.horiz * 78 + Drawing.top_right)
+        for _ in range(23):
+            if _ == 0:
+                subject = f'{emoji} {subject} {emoji}'
+                print(subject.center(80))
+                continue
+            elif _ == 1:
+                print(Drawing.vert + Drawing.horiz * 78 + Drawing.vert)
+                continue
+            elif _ == 21:
+                print(Drawing.vert + Drawing.horiz * 78 + Drawing.vert)
+                continue
+            elif _ == 22:
+                print('[B]ack'.center(38) + Drawing.vert + '[N]ext'.center(38))
+            elif ootext:
+                print(Drawing.vert + ' ' * 78 + Drawing.vert)
+            else:
+                try:
+                    print(Drawing.vert + f'{body[_ - 2]}' + Drawing.vert)
+                except IndexError:
+                    ootext = True
 
-        In the future, I may also want to add another method that draws a large standard size boarder. So this would
-        handle small non-standard text elements, while the second method would handle a singe large standard text
-        element. Something like drawing a single journal entry.
-        """
-        pass
+        print(Drawing.bottom_left + Drawing.horiz * 78 + Drawing.bottom_right)
+
 
 character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
                      't': [0x4, 0xE, 0x4, 0x4, 0x4],
@@ -189,6 +208,35 @@ if __name__ == '__main__':
     # print(some_code)
     # emoji_code = EmojiUnicodes.clock
     # print(emoji_code)
-    Drawing.print_character_sprite('intro.py')
-    print('')
-    Drawing.print_character_sprite('The end')
+    # Drawing.print_character_sprite('intro.py')
+    # print('')
+    # Drawing.print_character_sprite('The end')
+
+    test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
+    massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, 
+    ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, 
+    fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, 
+    justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper 
+    nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, 
+    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius 
+    laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. 
+    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, 
+    sit amet adipiscing sem neque sed ipsum. N"""
+
+    # Quick fix to clean up dirty string spacing from copied in test data.
+    test_data = ' '.join(test_data.split())
+
+    # test_text = textwrap.dedent(test_data)
+    # test_text = textwrap.wrap(test_text, width=78)
+    test_text = textwrap.wrap(test_data, width=78)
+    test_text = [line.ljust(78) for line in test_text]
+
+    Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
+    direction = input()
+
+    clear_console()
+
+    if direction.lower() == 'b':
+        Drawing.draw_window('A before entry.', '\U000026BE', test_text)
+    else:
+        Drawing.draw_window('An after entry.', '\U000026BE', test_text)
