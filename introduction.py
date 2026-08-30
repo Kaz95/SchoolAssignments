@@ -28,14 +28,6 @@ class Drawing:
     vert = "\u2502"  # │
     half_block = "\u2588"  # █
 
-    def __init__(self):
-        """I don't think I'll end up needing an init, as I won't be using instances.
-
-        This is a bit of a new situation for me. I don't need to customize the class unless I want to customize some
-        aspect of drawing, and I don't think I do, currently.
-        """
-        pass
-
     @staticmethod
     def print_character_sprite(word):
         """Draw character sprite base on given sprite data."""
