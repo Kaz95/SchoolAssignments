@@ -2,13 +2,10 @@
 
 TODO:
     * Sketch a quick overview of overall program flow.
-    * Write prototype sprite drawing logic
-    * Write prototype boarder drawing logic
-    * Write prototype 'Journal' entry boarder logic
+    * Start integration of new stuff and removal of deprecated code.
     * Fill out docstrings
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
-    * Write 10 print statements.
-    * Improve end 'animation'. Maybe use Unicode 'blocks'
+    * Write 10 'Entries'
 """
 import shutil, time, textwrap
 import subprocess
