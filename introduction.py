@@ -88,6 +88,7 @@ character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
                      'p': [0xE, 0xA, 0xE, 0x8, 0x8],
                      'y': [0xA, 0xA, 0xE, 0x4, 0x4]}
 
+
 class ColorEscapeSequences:
     """Enumerated ANSI escape sequences.
 
@@ -113,7 +114,8 @@ class ColorEscapeSequences:
     BOLDMAGENTA = "\033[1m\033[35m"  # Bold Magenta
     BOLDCYAN = "\033[1m\033[36m"  # Bold Cyan
     BOLDWHITE = "\033[1m\033[37m"  # Bold White
-    PHOSPHORGREEN = "\033[1;92m" # Bold, High-Intensity green.
+    PHOSPHORGREEN = "\033[1;92m"  # Bold, High-Intensity green.
+
 
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
@@ -143,6 +145,7 @@ class PadZeroMeta(type):
             new_val = PadZeroMeta.fill_emoji_unicode(value)
             return new_val
 
+
 class EmojiUnicodes(metaclass=PadZeroMeta):
     blood = '1FA78'
     clock = r'1F570\uFE0F'
@@ -154,14 +157,17 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     planet = '1F30C'
     briefcase = '1F4BC'
 
+
 def the_end():
     """There's a reason I'm a STEM major. This is about the extent of my artistic skills."""
     print(' ' + '-' * 20 + ' ')
-    print(Drawing.half_block + ' ' * 7 + f"{ColorEscapeSequences.RED}THE END{ColorEscapeSequences.RESET}" +  ' ' * 7 + Drawing.half_block)
+    print(
+        Drawing.half_block + ' ' * 7 + f"{ColorEscapeSequences.RED}THE END{ColorEscapeSequences.RESET}" + ' ' * 7 + Drawing.half_block)
     print(' ' + '-' * 20 + ' ')
     for _ in range(31):
         time.sleep(.75)
         print('')
+
 
 def introduction():
     pass
@@ -175,6 +181,7 @@ def introduction():
     # Arcade Games
     # Media Genres
     # Job
+
 
 def main():
     for _ in range(11):
@@ -196,6 +203,8 @@ def main():
         for _ in range(16):
             print('Z', end='')
             time.sleep(1)
+
+
 # TODO This pattern is straight from the docs and modified. Figure out why it said os is deprecated.
 def clear_console():
     if sys.platform == 'win32':
@@ -203,6 +212,7 @@ def clear_console():
     else:
         command = 'clear'
     subprocess.run(command, shell=True)
+
 
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
