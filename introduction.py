@@ -11,8 +11,8 @@ TODO:
     * Improve end 'animation'. Maybe use Unicode 'blocks'
 """
 import shutil, time, textwrap
-
-
+import subprocess
+import sys
 
 terminal_width, terminal_height = shutil.get_terminal_size()
 
@@ -199,6 +199,13 @@ def main():
         for _ in range(16):
             print('Z', end='')
             time.sleep(1)
+# TODO This pattern is straight from the docs and modified. Figure out why it said os is deprecated.
+def clear_console():
+    if sys.platform == 'win32':
+        command = 'cls'
+    else:
+        command = 'clear'
+    subprocess.run(command, shell=True)
 
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
