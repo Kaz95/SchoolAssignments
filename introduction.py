@@ -357,6 +357,11 @@ def clear_console() -> None:
         command = 'clear'
     subprocess.run(command, shell=True)
 
+def format_text(text):
+    text = textwrap.wrap(text, width=78)
+    text = [line.ljust(78) for line in text]
+    return text
+    # FIXME: Write text formatter for entries.
 
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
