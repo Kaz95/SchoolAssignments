@@ -1,12 +1,15 @@
 """A program introducing myself.
 
 TODO:
-    * Sketch a quick overview of overall program flow.
-    * Start integration of new stuff and removal of deprecated code.
+    * Write 10 'Entries'.
+    * Finish entry viewer.
+    * Clean up file. There's stuff everywhere.
+    * Add color swapping.
+    * Finish integration of new stuff and removal of deprecated code.
     * Fill out docstrings.
     * Fill out type hints.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
-    * Write 10 'Entries'.
+
 """
 import shutil, time, textwrap
 import subprocess
