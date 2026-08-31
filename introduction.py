@@ -2,6 +2,7 @@
 
 TODO:
     * Write 10 'Entries'.
+    * Adjust entry view to not push off screen.
     * Finish entry viewer.
     * Clean up file. There's stuff everywhere.
     * Add color swapping.
@@ -91,6 +92,30 @@ class Drawing:
     def draw_ticker_row(cls, row_contents=' ' * 80):
         print(cls.circle, row_contents, cls.circle)
         time.sleep(1)
+
+class Entries:
+    current_entry = 0
+    ENTRIES = []
+
+    @classmethod
+    def next_entry(cls):
+        if (cls.current_entry + 1) >= len(cls.ENTRIES):
+            # Drawing.print_character_sprite('The end')
+            return False
+        else:
+            cls.current_entry += 1
+            return True
+
+    @classmethod
+    def prev_entry(cls):
+        if (cls.current_entry - 1) <= 0:
+            cls.current_entry = 0
+        else:
+            cls.current_entry -= 1
+
+    @classmethod
+    def print_entry(cls):
+        Drawing.draw_window(cls.ENTRIES[cls.current_entry])
 
 
 character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
@@ -271,6 +296,7 @@ if __name__ == '__main__':
     Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
     input()
+    print(ColorEscapeSequences.PHOSPHORGREEN)
     # Drawing.print_character_sprite('The end')
 
     test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
@@ -295,28 +321,37 @@ if __name__ == '__main__':
     baseball_entry = Entry(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
     prev_entry = Entry(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
     next_entry = Entry(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
-    entries = [prev_entry, baseball_entry, next_entry]
-    Drawing.draw_window(entries[cur_entry])
+    # entries = [prev_entry, baseball_entry, next_entry]
+    Entries.ENTRIES.append(baseball_entry)
+    Entries.ENTRIES.append(prev_entry)
+    Entries.ENTRIES.append(next_entry)
+    Entries.ENTRIES.sort(key=lambda entry: entry.ordinal)
+    Drawing.draw_window(Entries.ENTRIES[cur_entry])
 
     while True:
+        # Entries.print_entry()
         # Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
         direction = input('? ')
         #
         clear_console()
 
         if direction.lower() == 'b':
-            cur_entry -= 1
-            if cur_entry < 0:
-                cur_entry = 0
-
+            Entries.prev_entry()
+        #     cur_entry -= 1
+        #     if cur_entry < 0:
+        #         cur_entry = 0
+        #
         else:
-            cur_entry += 1
-            if cur_entry > len(entries) - 1:
-                cur_entry = len(entries) - 1
-                print('The end.')
+            if not Entries.next_entry():
                 break
+        #     cur_entry += 1
+        #     if cur_entry > len(entries) - 1:
+        #         cur_entry = len(entries) - 1
+        #         print('The end.')
+        #         break
+        #
+        # Drawing.draw_window(entries[cur_entry])
+        Entries.print_entry()
 
-        Drawing.draw_window(entries[cur_entry])
-
-
+    print(ColorEscapeSequences.RESET)
     Drawing.print_character_sprite('The end')
