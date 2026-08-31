@@ -19,7 +19,7 @@ from dataclasses import dataclass
 terminal_width, terminal_height = shutil.get_terminal_size()
 
 @dataclass()
-class Entries:
+class Entry:
     ordinal: int
     subject: str
     emoji: str
@@ -61,7 +61,7 @@ class Drawing:
         time.sleep(3)
 
     @classmethod
-    def draw_window(cls, entry: Entries):
+    def draw_window(cls, entry: Entry):
         ootext = False
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
         for _ in range(23):
@@ -292,9 +292,9 @@ if __name__ == '__main__':
     test_text = textwrap.wrap(test_data, width=78)
     test_text = [line.ljust(78) for line in test_text]
     cur_entry = 0
-    baseball_entry = Entries(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
-    prev_entry = Entries(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
-    next_entry = Entries(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
+    baseball_entry = Entry(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
+    prev_entry = Entry(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
+    next_entry = Entry(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
     entries = [prev_entry, baseball_entry, next_entry]
     Drawing.draw_window(entries[cur_entry])
 
