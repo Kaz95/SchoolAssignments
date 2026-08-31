@@ -13,7 +13,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 
-terminal_width, terminal_height = shutil.get_terminal_size()
+TERMINAL_WIDTH, TERMINAL_HEIGHT = shutil.get_terminal_size()
 
 entry_contents = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
                                  "much detail here due to space constraints, but it generally manifests in swollen "
