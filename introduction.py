@@ -24,6 +24,7 @@ class Drawing:
     horiz = "\u2500"  # ─
     vert = "\u2502"  # │
     half_block = "\u2588"  # █
+    circle = '\u2B24' # ⬤
 
     @classmethod
     def print_character_sprite(cls, word):
@@ -43,8 +44,9 @@ class Drawing:
                 graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
                 row_string += graphic_row
             row_string = row_string.center(terminal_width)
-            print('\u2B24', row_string, '\u2B24')
-            time.sleep(1)
+            # print('\u2B24', row_string, '\u2B24')
+            # time.sleep(1)
+            Drawing.draw_ticker_row(row_string)
 
     @classmethod
     def draw_window(cls, subject, emoji, body):
@@ -72,6 +74,11 @@ class Drawing:
                     ootext = True
 
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
+
+    @classmethod
+    def draw_ticker_row(cls, row_contents=' ' * 80):
+        print(cls.circle, row_contents, cls.circle)
+        time.sleep(1)
 
 
 character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
@@ -158,6 +165,7 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     briefcase = '1F4BC'
 
 
+
 def the_end():
     """There's a reason I'm a STEM major. This is about the extent of my artistic skills."""
     print(' ' + '-' * 20 + ' ')
@@ -183,26 +191,44 @@ def introduction():
     # Job
 
 
-def main():
-    for _ in range(11):
-        print(textwrap.fill('Something about me and stuff' * 10, width=80))
+# def main():
+#     for _ in range(11):
+#         print(textwrap.fill('Something about me and stuff' * 10, width=80))
+#
+#     first_pass = True
+#     while True:
+#         if first_pass:
+#             done = input('Are you finished reading? Y/N: ')
+#             first_pass = False
+#         else:
+#             done = input('\nHow about now? Y/N: ')
+#
+#         if done.lower() == 'y':
+#             the_end()
+#             break
+#
+#         print('No problem. Take your time. I\'m going for a quick nap.')
+#         for _ in range(16):
+#             print('Z', end='')
+#             time.sleep(1)
 
-    first_pass = True
-    while True:
-        if first_pass:
-            done = input('Are you finished reading? Y/N: ')
-            first_pass = False
-        else:
-            done = input('\nHow about now? Y/N: ')
+def main() -> None:
+    """Main program entry."""
+    Drawing.print_character_sprite('intro.py')
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    # Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row('Controls:'.center(terminal_width))
+    Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
+    Drawing.draw_ticker_row('[B]back'.center(terminal_width))
+    Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
+    Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
+    input()
+    # TODO: Figure out I'm going to organize 'entries'. Probably a list or dict. List makes more sense.
+    # Drawing.draw_window()
+    # Print instructions
+    # Open first entry w/ prompt for movement.
 
-        if done.lower() == 'y':
-            the_end()
-            break
-
-        print('No problem. Take your time. I\'m going for a quick nap.')
-        for _ in range(16):
-            print('Z', end='')
-            time.sleep(1)
 
 
 # TODO This pattern is straight from the docs and modified. Figure out why it said os is deprecated.
