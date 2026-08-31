@@ -2,10 +2,8 @@
 
 TODO:
     * Write 10 'Entries'.
-    * Adjust entry view to not push off screen.
-    * Clean up file. There's stuff everywhere.
-    * Add color swapping.
-    * Finish integration of new stuff and removal of deprecated code.
+    * Verify entry sizing.
+    * Write new main function that reflects current state of program.
     * Fill out docstrings.
     * Fill out type hints.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
