@@ -175,6 +175,7 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     joystick = r'1F579\uFE0F'
     planet = '1F30C'
     briefcase = '1F4BC'
+    robot = '1F916'
 
 
 
