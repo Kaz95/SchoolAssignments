@@ -168,7 +168,7 @@ class Drawing:
                 row = f'{char[_]:05b}'
                 graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
                 row_string += graphic_row
-            row_string = row_string.center(terminal_width)
+            row_string = row_string.center(TERMINAL_WIDTH)
             Drawing.draw_ticker_row(row_string)
         time.sleep(3)
 
