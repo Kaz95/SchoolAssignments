@@ -4,8 +4,6 @@ TODO:
     * Write 10 'Entries'.
     * Verify entry sizing.
     * Write new main function that reflects current state of program.
-    * Fill out docstrings.
-    * Fill out type hints.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
 
 """
@@ -18,6 +16,7 @@ terminal_width, terminal_height = shutil.get_terminal_size()
 
 @dataclass()
 class Entry:
+    """A single entry."""
     ordinal: int
     subject: str
     emoji: str
@@ -25,7 +24,7 @@ class Entry:
 
 
 class Drawing:
-    """Character codes used for drawing boarders."""
+    """Class that handles all drawing logic."""
     top_left = "\u250c"  # ┌
     top_right = "\u2510"  # ┐
     bottom_left = "\u2514"  # └
@@ -36,7 +35,7 @@ class Drawing:
     circle = '\u2B24' # ⬤
 
     @classmethod
-    def print_character_sprite(cls, word):
+    def print_character_sprite(cls, word:str) -> None:
         """Draw character sprite base on given sprite data."""
         # Need to double up to maintain square aspect ratio
         full_block = cls.half_block * 2
@@ -57,7 +56,8 @@ class Drawing:
         time.sleep(3)
 
     @classmethod
-    def draw_window(cls, entry: Entry):
+    def draw_window(cls, entry: Entry) -> None:
+        """Draw a 'window' with boarder Unicode characters."""
         ootext = False
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
         for _ in range(22):
@@ -84,16 +84,22 @@ class Drawing:
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
 
     @classmethod
-    def draw_ticker_row(cls, row_contents=' ' * 80):
+    def draw_ticker_row(cls, row_contents: str = ' ' * 80) -> None:
+        """Draw paper tape ticks, with contents centered within."""
         print(cls.circle, row_contents, cls.circle)
         time.sleep(1)
 
 class Entries:
+    """Class to handle working with entries.
+
+    Handles ordering based on ordinal, as well as printing.
+    """
     current_entry = 0
     ENTRIES = []
 
     @classmethod
-    def next_entry(cls):
+    def next_entry(cls) -> bool:
+        """Move to next entry. Return false if last entry."""
         if (cls.current_entry + 1) >= len(cls.ENTRIES):
             return False
         else:
@@ -101,14 +107,16 @@ class Entries:
             return True
 
     @classmethod
-    def prev_entry(cls):
+    def prev_entry(cls) -> None:
+        """Move to prev entry."""
         if (cls.current_entry - 1) <= 0:
             cls.current_entry = 0
         else:
             cls.current_entry -= 1
 
     @classmethod
-    def print_entry(cls):
+    def print_entry(cls) -> None:
+        """Print a single entry."""
         Drawing.draw_window(cls.ENTRIES[cls.current_entry])
 
 
@@ -142,10 +150,12 @@ class ColorEscapeSequences:
 
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
+    """EmojiUnicodes Metaclass."""
     # Trying to add this to class or references just about any way other than class level static method causes recursion
     # I mostly understand why, but I need to look into it more. TODO: Fully understand class lookup.
     @staticmethod
-    def fill_emoji_unicode(emoji: str):
+    def fill_emoji_unicode(emoji: str) -> str:
+        """Pad emoji strings with correct amount of '0's."""
         split_emoji = emoji.split(r'\u')
         padded_code = rf'\U{split_emoji[0]:0>8}'
 
@@ -169,6 +179,7 @@ class PadZeroMeta(type):
 
 
 class EmojiUnicodes(metaclass=PadZeroMeta):
+    """Emoji Unicode string constants."""
     blood = '1FA78'
     clock = r'1F570\uFE0F'
     programmer = '1F4BE'
@@ -213,7 +224,8 @@ def introduction():
 
 
 # TODO This pattern is straight from the docs and modified. Figure out why it said os is deprecated.
-def clear_console():
+def clear_console() -> None:
+    """Multi-platform console clear."""
     if sys.platform == 'win32':
         command = 'cls'
     else:
