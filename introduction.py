@@ -55,6 +55,7 @@ class Drawing:
             # print('\u2B24', row_string, '\u2B24')
             # time.sleep(1)
             Drawing.draw_ticker_row(row_string)
+        time.sleep(3)
 
     @classmethod
     def draw_window(cls, entry: Entries):
