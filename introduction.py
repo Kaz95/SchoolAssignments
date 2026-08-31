@@ -257,8 +257,16 @@ if __name__ == '__main__':
     # print(some_code)
     # emoji_code = EmojiUnicodes.clock
     # print(emoji_code)
-    # Drawing.print_character_sprite('intro.py')
-    # print('')
+    Drawing.print_character_sprite('intro.py')
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row('Controls:'.center(terminal_width))
+    Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
+    Drawing.draw_ticker_row('[B]ack'.center(terminal_width))
+    Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
+    Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
+    input()
     # Drawing.print_character_sprite('The end')
 
     test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
@@ -305,3 +313,6 @@ if __name__ == '__main__':
                 break
 
         Drawing.draw_window(entries[cur_entry])
+
+
+    Drawing.print_character_sprite('The end')
