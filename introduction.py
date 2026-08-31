@@ -231,7 +231,7 @@ def main() -> None:
     Drawing.draw_ticker_row('[B]back'.center(terminal_width))
     Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
-    input()
+    input('? ')
     # TODO: Figure out I'm going to organize 'entries'. Probably a list or dict. List makes more sense.
     # Drawing.draw_window()
     # Print instructions
@@ -287,7 +287,7 @@ if __name__ == '__main__':
 
     while True:
         # Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
-        direction = input()
+        direction = input('? ')
         #
         clear_console()
 
