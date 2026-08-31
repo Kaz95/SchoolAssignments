@@ -215,6 +215,11 @@ class Entries:
     ENTRIES = []
 
     @classmethod
+    def create_entry(cls, ordinal, subject, emoji, contents):
+        cls.ENTRIES.append(Entry(ordinal, subject, emoji, contents))
+
+
+    @classmethod
     def next_entry(cls) -> bool:
         """Move to next entry. Return false if last entry."""
         if (cls.current_entry + 1) >= len(cls.ENTRIES):
