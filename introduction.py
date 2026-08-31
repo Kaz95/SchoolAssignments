@@ -312,6 +312,9 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     planet = '1F30C'
     briefcase = '1F4BC'
     robot = '1F916'
+    book = '1F4D6'
+    thanks = '1F64F'
+    alien = '1F47D'
 
 def introduction():
     pass
