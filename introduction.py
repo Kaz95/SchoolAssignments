@@ -55,8 +55,6 @@ class Drawing:
                 graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
                 row_string += graphic_row
             row_string = row_string.center(terminal_width)
-            # print('\u2B24', row_string, '\u2B24')
-            # time.sleep(1)
             Drawing.draw_ticker_row(row_string)
         time.sleep(3)
 
@@ -99,7 +97,6 @@ class Entries:
     @classmethod
     def next_entry(cls):
         if (cls.current_entry + 1) >= len(cls.ENTRIES):
-            # Drawing.print_character_sprite('The end')
             return False
         else:
             cls.current_entry += 1
@@ -141,22 +138,7 @@ class ColorEscapeSequences:
     """
 
     RESET = "\033[0m"
-    BLACK = "\033[30m"  # Black
-    RED = "\033[31m"  # Red
-    GREEN = "\033[32m"  # Green
-    YELLOW = "\033[33m"  # Yellow
-    BLUE = "\033[34m"  # Blue
-    MAGENTA = "\033[35m"  # Magenta
-    CYAN = "\033[36m"  # Cyan
     WHITE = "\033[37m"  # White
-    BOLDBLACK = "\033[1m\033[30m"  # Bold Black
-    BOLDRED = "\033[1m\033[31m"  # Bold Red
-    BOLDGREEN = "\033[1m\033[32m"  # Bold Green
-    BOLDYELLOW = "\033[1m\033[33m"  # Bold Yellow
-    BOLDBLUE = "\033[1m\033[34m"  # Bold Blue
-    BOLDMAGENTA = "\033[1m\033[35m"  # Bold Magenta
-    BOLDCYAN = "\033[1m\033[36m"  # Bold Cyan
-    BOLDWHITE = "\033[1m\033[37m"  # Bold White
     PHOSPHORGREEN = "\033[1;92m"  # Bold, High-Intensity green.
 
 
@@ -200,19 +182,6 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     briefcase = '1F4BC'
     robot = '1F916'
 
-
-
-def the_end():
-    """There's a reason I'm a STEM major. This is about the extent of my artistic skills."""
-    print(' ' + '-' * 20 + ' ')
-    print(
-        Drawing.half_block + ' ' * 7 + f"{ColorEscapeSequences.RED}THE END{ColorEscapeSequences.RESET}" + ' ' * 7 + Drawing.half_block)
-    print(' ' + '-' * 20 + ' ')
-    for _ in range(31):
-        time.sleep(.75)
-        print('')
-
-
 def introduction():
     pass
     # Hemophilia
@@ -225,28 +194,6 @@ def introduction():
     # Arcade Games
     # Media Genres
     # Job
-
-
-# def main():
-#     for _ in range(11):
-#         print(textwrap.fill('Something about me and stuff' * 10, width=80))
-#
-#     first_pass = True
-#     while True:
-#         if first_pass:
-#             done = input('Are you finished reading? Y/N: ')
-#             first_pass = False
-#         else:
-#             done = input('\nHow about now? Y/N: ')
-#
-#         if done.lower() == 'y':
-#             the_end()
-#             break
-#
-#         print('No problem. Take your time. I\'m going for a quick nap.')
-#         for _ in range(16):
-#             print('Z', end='')
-#             time.sleep(1)
 
 # def main() -> None:
 #     """Main program entry."""
@@ -280,10 +227,7 @@ def clear_console():
 # That way I (or you) only need to move one line.
 if __name__ == '__main__':
     # main()
-    # some_code = fill_emoji_unicode(EmojiUnicodes.fish)
-    # print(some_code)
-    # emoji_code = EmojiUnicodes.clock
-    # print(emoji_code)
+
     Drawing.print_character_sprite('intro.py')
     Drawing.draw_ticker_row()
     Drawing.draw_ticker_row()
@@ -295,7 +239,6 @@ if __name__ == '__main__':
     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
     input()
     print(ColorEscapeSequences.PHOSPHORGREEN)
-    # Drawing.print_character_sprite('The end')
 
     test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
     massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, 
@@ -315,7 +258,6 @@ if __name__ == '__main__':
     # test_text = textwrap.wrap(test_text, width=78)
     test_text = textwrap.wrap(test_data, width=78)
     test_text = [line.ljust(78) for line in test_text]
-    cur_entry = 0
     baseball_entry = Entry(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
     prev_entry = Entry(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
     next_entry = Entry(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
@@ -324,31 +266,19 @@ if __name__ == '__main__':
     Entries.ENTRIES.append(prev_entry)
     Entries.ENTRIES.append(next_entry)
     Entries.ENTRIES.sort(key=lambda entry: entry.ordinal)
-    Drawing.draw_window(Entries.ENTRIES[cur_entry])
+    Drawing.draw_window(Entries.ENTRIES[Entries.current_entry])
 
     while True:
-        # Entries.print_entry()
-        # Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
         direction = input('? ')
-        #
         clear_console()
 
         if direction.lower() == 'b':
             Entries.prev_entry()
-        #     cur_entry -= 1
-        #     if cur_entry < 0:
-        #         cur_entry = 0
-        #
+
         else:
             if not Entries.next_entry():
                 break
-        #     cur_entry += 1
-        #     if cur_entry > len(entries) - 1:
-        #         cur_entry = len(entries) - 1
-        #         print('The end.')
-        #         break
-        #
-        # Drawing.draw_window(entries[cur_entry])
+
         Entries.print_entry()
 
     print(ColorEscapeSequences.RESET)
