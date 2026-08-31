@@ -221,18 +221,18 @@ def introduction():
 #             print('Z', end='')
 #             time.sleep(1)
 
-def main() -> None:
-    """Main program entry."""
-    Drawing.print_character_sprite('intro.py')
-    Drawing.draw_ticker_row()
-    Drawing.draw_ticker_row()
-    # Drawing.draw_ticker_row()
-    Drawing.draw_ticker_row('Controls:'.center(terminal_width))
-    Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
-    Drawing.draw_ticker_row('[B]back'.center(terminal_width))
-    Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
-    Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
-    input('? ')
+# def main() -> None:
+#     """Main program entry."""
+#     Drawing.print_character_sprite('intro.py')
+#     Drawing.draw_ticker_row()
+#     Drawing.draw_ticker_row()
+#     # Drawing.draw_ticker_row()
+#     Drawing.draw_ticker_row('Controls:'.center(terminal_width))
+#     Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
+#     Drawing.draw_ticker_row('[B]back'.center(terminal_width))
+#     Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
+#     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
+#     input('? ')
     # TODO: Figure out I'm going to organize 'entries'. Probably a list or dict. List makes more sense.
     # Drawing.draw_window()
     # Print instructions
