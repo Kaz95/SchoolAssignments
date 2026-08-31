@@ -1,6 +1,7 @@
 """A program introducing myself.
 
 TODO:
+    * Move post title sleep outside of title function for better control.
     * Write 10 'Entries'.
     * Verify entry sizing.
     * Write new main function that reflects current state of program.
@@ -13,6 +14,84 @@ import sys
 from dataclasses import dataclass
 
 terminal_width, terminal_height = shutil.get_terminal_size()
+
+entry_contents = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
+                                 "much detail here due to space constraints, but it generally manifests in swollen "
+                                 "joints and muscles. It caused me to miss quite a bit of school in my late teens. "
+                                 "It's also the reason I was not able to attend college until now. I've always wanted "
+                                 "to continue my education after high school, but the state of my health just "
+                                 "didn't allow it. Recently, the medicine I use to treat the condition has improved "
+                                 "quite a bit and as a result I'm finally able to attend in-person classes. "
+                                 "Honestly, I'm ecstatic everyday knowing I get to go to school. A dream come true may "
+                                 "be a bit over dramatic, but it really isn't that far off the truth."),
+
+                  'age': ("I'm a non traditional student, with this being my first semester at 31."
+                          "As I mentioned, I was unable to attend school for many years, and as a result I'm getting "
+                          "a late start. It's hard not to feel like I'm already behind, even though I've just started. "
+                          "Although, in some ways, I'm thankful to just be starting. I'm a much different person than "
+                          "I was in my twenties. I feel like the person I am today is much better prepared for what's to "
+                          "come."),
+
+                  'ai': ("AI scares the absolute crap out of me. It is also among the coolest things I've been alive "
+                         "to see the advent of. I believe one day this era will be looked at similar to the adoption "
+                         "of stored program computers, or that first keyboard being introduced to the Whirl Wind project. "
+                         "Its one of the largest shifts ever in how humans will interface with computers in the future."
+                         "Its amazing at searching documentation, acting as a sounding board(rubber ducking), and "
+                         "providing basic usage examples for 3rd party libraries APIs. I use it quite a bit for those "
+                         "things specifically in the last few months. It can really save a lot of time in those tasks."
+                         "All that being said, it still scares the crap out of me. It should scare anyone who's ever "
+                         "written a line of code before its advent. I realized very quickly you can't use it for code "
+                         "generation, if you want to learn anything anyway. You don't bring a forklift to the gym."
+                         "As a result, I actually have little(no) experience with AI workflows or anything like that. "
+                         "Tooling changes often, and I can always learn it later."),
+
+                  'major': ("I'm currently working on an Associates in Engineering sciences transfer degree. "
+                            "I plan to transfer to UIC under the TAG program. Originally, I intended to major in "
+                            "Computer Science after my transfer, but a number of things pushed me towards Computer "
+                            "Engineering. My aforementioned fear of AI definitely played a role. I'm worried about "
+                            "what the average software focused role will look like when I graduate. I'm worried about "
+                            "how many of those roles will exist. I've never been interested in front-end development "
+                            "for the most part, so that eliminates many possible career paths. Over the last few "
+                            "months, I've tried to distill my interests down to the point where I could better picture "
+                            "what kind of job I may want some day. That process led me to Computer Engineering."),
+
+                  'study': ("The areas I'm most interested in at the moment are embedded systems, FPGAs, and "
+                            "networking. It occurred to me, I knew quite a bit about high level "
+                            "programming(both functional and object oriented), but painfully little about much else in "
+                            "the realm of computer science. So, I started learning C to learn about low level "
+                            "memory management, and embedded systems. I started working on the nand2Tetris project to "
+                            "learn about digital design. I'm currently wrestling with De Morgan's law and boolean "
+                            "algebra. For networking, I'm learning about the OSI model and its various layers. These "
+                            "areas of interest and all I've learned about them recently helped push me towards "
+                            "Computer Engineering."),
+
+                  'fishing': ("Outside of computer related things, I only have a few hobbies I really enjoy. One of "
+                              "them is bass fishing. I like fishing in general, but Largemouth and Smallmouth Bass "
+                              "are my favorites. I grew up fishing pretty casually with my family, but had been away "
+                              "from it for some time. When my health started to improve I decided to try bass fishing "
+                              "and got hooked(pun intended). One of the things I'm most looking forward to when I "
+                              "start my career, will be purchasing my first bass boat."),
+
+                  'baseball': ("Another non computer related hobby of mine is baseball. I try to catch as many games "
+                               "as I can on TV. I'm a White Sox fan, although I follow a number of other teams. My "
+                               "favorite active player on the Sox is Sam Antonacci. I've rarely seen anyone do "
+                               "much of anything in life with the effort he puts in every play. As I fan, I appreciate "
+                               "that more than the result."),
+
+                  'arcade': ("I've enjoyed video games as long as I can remember. My earliest memories include playing "
+                             "Pac-man on my mom's Game Boy in her lap. They include me teaching myself how to use a "
+                             "floppy drive so I could play old MS DOS games we acquired from who knows where. Arcade "
+                             "games are my favorites. They are where I started(Pac-man/Galaga) and where I eventually "
+                             "landed. Something about the simplicity of early 80s arcade games mixed with the "
+                             "deceptive difficulty, makes them timeless."),
+
+                  'scifi': ("My favorite genre across all forms of media, is scifi. I enjoy fantasy and historical "
+                            "dramas, but scifi trounces everything else. My dad grew up on Star Trek, and he passed "
+                            "it right on down to me. I've seen each of the Star Trek series more times than I care to "
+                            "admit, with my favorite being Next Generation. I spend more time reading scifi, than "
+                            "watching it nowadays. I've mostly been reading Star Trek and Star Wars lately, but "
+                            "I'll read just about anything scifi if it catches my interest."),
+                  'job': None}
 
 @dataclass()
 class Entry:
@@ -248,6 +327,7 @@ if __name__ == '__main__':
     Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
     input()
+    clear_console()
     print(ColorEscapeSequences.PHOSPHORGREEN)
 
     test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
