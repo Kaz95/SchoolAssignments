@@ -15,15 +15,14 @@ from dataclasses import dataclass
 
 TERMINAL_WIDTH, TERMINAL_HEIGHT = shutil.get_terminal_size()
 
-entry_contents = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
+ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
                                  "much detail here due to space constraints, but it generally manifests in swollen "
                                  "joints and muscles. It caused me to miss quite a bit of school in my late teens. "
                                  "It's also the reason I was not able to attend college until now. I've always wanted "
                                  "to continue my education after high school, but the state of my health just "
                                  "didn't allow it. Recently, the medicine I use to treat the condition has improved "
                                  "quite a bit and as a result I'm finally able to attend in-person classes. "
-                                 "Honestly, I'm ecstatic everyday knowing I get to go to school. A dream come true may "
-                                 "be a bit over dramatic, but it really isn't that far off the truth."),
+                                 "Honestly, I'm ecstatic everyday knowing I get to go to school."),
 
                   'age': ("I'm a non traditional student, with this being my first semester at 31."
                           "As I mentioned, I was unable to attend school for many years, and as a result I'm getting "
@@ -70,7 +69,10 @@ entry_contents = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                               "are my favorites. I grew up fishing pretty casually with my family, but had been away "
                               "from it for some time. When my health started to improve I decided to try bass fishing "
                               "and got hooked(pun intended). One of the things I'm most looking forward to when I "
-                              "start my career, will be purchasing my first bass boat."),
+                              "start my career, will be purchasing my first bass boat. Oddly enough, bass fishing also "
+                              "helped push me towards Computer Engineering. There's some cool work being done with "
+                              "'Live Scope', a real time sonar system. There's work involving FPGAs, ASICs, and "
+                              "embedded systems."),
 
                   'baseball': ("Another non computer related hobby of mine is baseball. I try to catch as many games "
                                "as I can on TV. I'm a White Sox fan, although I follow a number of other teams. My "
@@ -83,15 +85,51 @@ entry_contents = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                              "floppy drive so I could play old MS DOS games we acquired from who knows where. Arcade "
                              "games are my favorites. They are where I started(Pac-man/Galaga) and where I eventually "
                              "landed. Something about the simplicity of early 80s arcade games mixed with the "
-                             "deceptive difficulty, makes them timeless."),
+                             "deceptive difficulty, makes them timeless. My love of arcade games is why I'm interested "
+                             "in FPGAs. The MiSTer project, which attempts to recreate various arcade hardware using "
+                             "FPGAs, is what drew me to them. This is one of the main things that pushed me towards "
+                             "Computer Engineering as a major."),
 
-                  'scifi': ("My favorite genre across all forms of media, is scifi. I enjoy fantasy and historical "
+                  'genres': ("My favorite genre across all forms of media, is scifi. I enjoy fantasy and historical "
                             "dramas, but scifi trounces everything else. My dad grew up on Star Trek, and he passed "
                             "it right on down to me. I've seen each of the Star Trek series more times than I care to "
                             "admit, with my favorite being Next Generation. I spend more time reading scifi, than "
                             "watching it nowadays. I've mostly been reading Star Trek and Star Wars lately, but "
-                            "I'll read just about anything scifi if it catches my interest."),
-                  'job': None}
+                            "I'll read just about anything scifi if it catches my interest. Since this entry is about "
+                            "genres of media I like, I'll finish with music. I like all types of music. Some of the "
+                            "more unexpected genres I enjoy are country, 80s Japanese city pop, and Spanish guitar. "
+                            "I've been listening to Andalusian Nights by Govi lately. Finding new music I enjoy is "
+                            "one of the things I get the most joy out of."),
+
+                  'computers': ("I love computers. I love absolutely everything about them. If you had asked for one "
+                                "thing about myself, that's what I would have said. Its, by far, the most important. I "
+                                "love programming, the history of them, the hardware, the theory. I love it all and I "
+                                "want to know it all. They got me through the roughest parts of my life. Sometimes they "
+                                "were my entertainment, other times they were my teacher. I met my two best friends "
+                                "playing World of Warcraft when we were 12. They are going to be how I make my living."),
+
+                  'thank_you': ("Well, thank you for reading all of that. I ended up enjoying this project quite a bit. "
+                                "Sometimes its easier to learn about yourself by telling someone else, I suppose. I "
+                                "think you've come up with a great class format. I was a bit harsh on the zybook "
+                                "lessons at first, but I realized I needed to look through the eyes of a beginner. "
+                                "The visual examples are really fantastic and would have been a great aid to me when "
+                                "I started. I love that you allow us to work at our own pace. It allowed me to gauge "
+                                "how much time I would be able to spend on this project. I spent the second half of one "
+                                "of our lab days working on this project under a nice tree, in front of one of the "
+                                "ponds on campus. I've never even programmed outside the house before. That was a "
+                                "really nice day. So, thanks for the attendance policy! It allowed me to enjoy "
+                                "something new. I'll close with a link to my github, where you will find my most "
+                                "recent completed project, and my current project. The completed project is a full "
+                                "stack desktop app I made to ease working with multiple versions of arcade game "
+                                "emulators. My current project is my first attempt at making an emulator of my own."
+                                "That project is where I got the idea for the 'bit-mapped' graphics in this project."
+                                "If there are ever any opportunities you think I may be a good fit for, please let me "
+                                "know. Tutoring, help desk, local internships; Whatever it is, I'm interseted.")
+
+                  }
+
+
+
 
 @dataclass()
 class Entry:
