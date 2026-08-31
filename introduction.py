@@ -11,8 +11,16 @@ TODO:
 import shutil, time, textwrap
 import subprocess
 import sys
+from dataclasses import dataclass
 
 terminal_width, terminal_height = shutil.get_terminal_size()
+
+@dataclass()
+class Entries:
+    ordinal: int
+    subject: str
+    emoji: str
+    contents: list[str]
 
 
 class Drawing:
@@ -49,12 +57,12 @@ class Drawing:
             Drawing.draw_ticker_row(row_string)
 
     @classmethod
-    def draw_window(cls, subject, emoji, body):
+    def draw_window(cls, entry: Entries):
         ootext = False
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
         for _ in range(23):
             if _ == 0:
-                subject = f'{emoji} {subject} {emoji}'
+                subject = f'{entry.emoji} {entry.subject} {entry.emoji}'
                 print(subject.center(80))
                 continue
             elif _ == 1:
@@ -69,7 +77,7 @@ class Drawing:
                 print(cls.vert + ' ' * 78 + cls.vert)
             else:
                 try:
-                    print(cls.vert + f'{body[_ - 2]}' + cls.vert)
+                    print(cls.vert + f'{entry.contents[_ - 2]}' + cls.vert)
                 except IndexError:
                     ootext = True
 
@@ -270,13 +278,29 @@ if __name__ == '__main__':
     # test_text = textwrap.wrap(test_text, width=78)
     test_text = textwrap.wrap(test_data, width=78)
     test_text = [line.ljust(78) for line in test_text]
+    cur_entry = 0
+    baseball_entry = Entries(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
+    prev_entry = Entries(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
+    next_entry = Entries(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
+    entries = [prev_entry, baseball_entry, next_entry]
+    Drawing.draw_window(entries[cur_entry])
 
-    Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
-    direction = input()
+    while True:
+        # Drawing.draw_window('I really enjoy watching baseball.', '\U000026BE', test_text)
+        direction = input()
+        #
+        clear_console()
 
-    clear_console()
+        if direction.lower() == 'b':
+            cur_entry -= 1
+            if cur_entry < 0:
+                cur_entry = 0
 
-    if direction.lower() == 'b':
-        Drawing.draw_window('A before entry.', '\U000026BE', test_text)
-    else:
-        Drawing.draw_window('An after entry.', '\U000026BE', test_text)
+        else:
+            cur_entry += 1
+            if cur_entry > len(entries) - 1:
+                cur_entry = len(entries) - 1
+                print('The end.')
+                break
+
+        Drawing.draw_window(entries[cur_entry])
