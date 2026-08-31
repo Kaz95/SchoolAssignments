@@ -367,48 +367,68 @@ def format_text(text):
 # That way I (or you) only need to move one line.
 if __name__ == '__main__':
     # main()
+    Entries.create_entry(0, 'Hemophilia', EmojiUnicodes.blood, format_text(ENTRY_CONTENTS['hemophilia']))
+    Entries.create_entry(1, 'Age', EmojiUnicodes.clock, format_text(ENTRY_CONTENTS['age']))
+    Entries.create_entry(2, 'AI', EmojiUnicodes.robot, format_text(ENTRY_CONTENTS['ai']))
+    Entries.create_entry(3, 'Major', EmojiUnicodes.programmer, format_text(ENTRY_CONTENTS['major']))
+    Entries.create_entry(4, 'Study', EmojiUnicodes.book, format_text(ENTRY_CONTENTS['study']))
+    Entries.create_entry(5, 'Fishing', EmojiUnicodes.fish, format_text(ENTRY_CONTENTS['fishing']))
+    Entries.create_entry(6, 'Baseball', EmojiUnicodes.baseball, format_text(ENTRY_CONTENTS['baseball']))
+    Entries.create_entry(7, 'Arcade', EmojiUnicodes.joystick, format_text(ENTRY_CONTENTS['arcade']))
+    Entries.create_entry(8, 'Genres', EmojiUnicodes.alien, format_text(ENTRY_CONTENTS['genres']))
+    Entries.create_entry(9, 'Computers', EmojiUnicodes.computer, format_text(ENTRY_CONTENTS['computers']))
+    Entries.create_entry(10, 'Thank You', EmojiUnicodes.thanks, format_text(ENTRY_CONTENTS['thank_you']))
 
-    Drawing.print_character_sprite('intro.py')
-    Drawing.draw_ticker_row()
-    Drawing.draw_ticker_row()
-    Drawing.draw_ticker_row()
-    Drawing.draw_ticker_row('Controls:'.center(terminal_width))
-    Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
-    Drawing.draw_ticker_row('[B]ack'.center(terminal_width))
-    Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
-    Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
-    input()
-    clear_console()
+    print(len(ENTRY_CONTENTS['thank_you']))
+
+
+    # Drawing.print_character_sprite('intro.py')
+    # Drawing.draw_ticker_row()
+    # Drawing.draw_ticker_row()
+    # Drawing.draw_ticker_row()
+    # Drawing.draw_ticker_row('Controls:'.center(TERMINAL_WIDTH))
+    # Drawing.draw_ticker_row('[N]ext'.center(TERMINAL_WIDTH))
+    # Drawing.draw_ticker_row('[B]ack'.center(TERMINAL_WIDTH))
+    # Drawing.draw_ticker_row('[E]xit'.center(TERMINAL_WIDTH))
+    # Drawing.draw_ticker_row('Press Enter to continue: '.center(TERMINAL_WIDTH))
+    # input()
+    # clear_console()
     print(ColorEscapeSequences.PHOSPHORGREEN)
 
-    test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean 
-    massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, 
-    ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, 
-    fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, 
-    justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper 
-    nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, 
-    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius 
-    laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. 
-    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, 
-    sit amet adipiscing sem neque sed ipsum. N"""
+    # test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+    # massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+    # ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
+    # fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+    # justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper
+    # nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+    # enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+    # laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+    # Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
+    # sit amet adipiscing sem neque sed ipsum. N"""
+    # print(len(test_data))
+    # # Quick fix to clean up dirty string spacing from copied in test data.
+    # test_data = ' '.join(test_data.split())
+    #
+    # # test_text = textwrap.dedent(test_data)
+    # # test_text = textwrap.wrap(test_text, width=78)
+    # test_text = textwrap.wrap(test_data, width=78)
+    # test_text = [line.ljust(78) for line in test_text]
+    #
+    # test2 = textwrap.wrap(ENTRY_CONTENTS['thank_you'], width=78)
+    # test2 = [line.ljust(78) for line in test2]
+    #
+    # baseball_entry = Entry(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
+    # prev_entry = Entry(1, 'A prev entry.', EmojiUnicodes.baseball, test2)
+    # next_entry = Entry(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
+    # # entries = [prev_entry, baseball_entry, next_entry]
+    # Entries.ENTRIES.append(baseball_entry)
+    # Entries.ENTRIES.append(prev_entry)
+    # Entries.ENTRIES.append(next_entry)
+    # Entries.ENTRIES.sort(key=lambda entry: entry.ordinal)
+    # Drawing.draw_window(Entries.ENTRIES[Entries.current_entry])
 
-    # Quick fix to clean up dirty string spacing from copied in test data.
-    test_data = ' '.join(test_data.split())
-
-    # test_text = textwrap.dedent(test_data)
-    # test_text = textwrap.wrap(test_text, width=78)
-    test_text = textwrap.wrap(test_data, width=78)
-    test_text = [line.ljust(78) for line in test_text]
-    baseball_entry = Entry(2, 'I really enjoy watching baseball.', EmojiUnicodes.baseball, test_text)
-    prev_entry = Entry(1, 'A prev entry.', EmojiUnicodes.baseball, test_text)
-    next_entry = Entry(3, 'A next entry.', EmojiUnicodes.baseball, test_text)
-    # entries = [prev_entry, baseball_entry, next_entry]
-    Entries.ENTRIES.append(baseball_entry)
-    Entries.ENTRIES.append(prev_entry)
-    Entries.ENTRIES.append(next_entry)
-    Entries.ENTRIES.sort(key=lambda entry: entry.ordinal)
-    Drawing.draw_window(Entries.ENTRIES[Entries.current_entry])
-
+    # Entries.ENTRIES.append()
+    Entries.print_entry()
     while True:
         direction = input('? ')
         clear_console()
