@@ -3,7 +3,6 @@
 TODO:
     * Write 10 'Entries'.
     * Adjust entry view to not push off screen.
-    * Finish entry viewer.
     * Clean up file. There's stuff everywhere.
     * Add color swapping.
     * Finish integration of new stuff and removal of deprecated code.
@@ -65,7 +64,7 @@ class Drawing:
     def draw_window(cls, entry: Entry):
         ootext = False
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        for _ in range(23):
+        for _ in range(22):
             if _ == 0:
                 subject = f'{entry.emoji} {entry.subject} {entry.emoji}'
                 print(subject.center(80))
@@ -73,10 +72,10 @@ class Drawing:
             elif _ == 1:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
                 continue
-            elif _ == 21:
+            elif _ == 20:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
                 continue
-            elif _ == 22:
+            elif _ == 21:
                 print('[B]ack'.center(38) + cls.vert + '[N]ext'.center(38))
             elif ootext:
                 print(cls.vert + ' ' * 78 + cls.vert)
@@ -169,7 +168,6 @@ class PadZeroMeta(type):
     def fill_emoji_unicode(emoji: str):
         split_emoji = emoji.split(r'\u')
         padded_code = rf'\U{split_emoji[0]:0>8}'
-        print(padded_code)
 
         if len(split_emoji) > 1:
             padded_code = padded_code + rf'\u{split_emoji[1]}'
