@@ -1,11 +1,8 @@
 """A program introducing myself.
 
 TODO:
-    * Move post title sleep outside of title function for better control.
-    * Write 10 'Entries'.
+    * Proof read entries.
     * Verify entry sizing.
-
-    * Write new main function that reflects current state of program.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
 
 """
@@ -13,6 +10,8 @@ import shutil, time, textwrap
 import subprocess
 import sys
 from dataclasses import dataclass
+
+# GLOBAL CONSTANTS
 
 TERMINAL_WIDTH, TERMINAL_HEIGHT = shutil.get_terminal_size()
 
@@ -130,6 +129,19 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                   }
 
 
+CHARACTER_SPRITES = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
+                     't': [0x4, 0xE, 0x4, 0x4, 0x4],
+                     'h': [0xA, 0xA, 0xE, 0xA, 0xA],
+                     'e': [0xE, 0x8, 0xE, 0x8, 0xE],
+                     'n': [0xE, 0xA, 0xA, 0xA, 0xA],
+                     'd': [0xC, 0xA, 0xA, 0xA, 0xC],
+                     ' ': [0x0, 0x0, 0x0, 0x0, 0x0],
+                     'i': [0x4, 0x4, 0x4, 0x4, 0x4],
+                     'r': [0xE, 0xA, 0x8, 0x8, 0x8],
+                     'o': [0xE, 0xA, 0xA, 0xA, 0xE],
+                     '.': [0x0, 0x0, 0x0, 0x0, 0x4],
+                     'p': [0xE, 0xA, 0xE, 0x8, 0x8],
+                     'y': [0xA, 0xA, 0xE, 0x4, 0x4]}
 
 
 @dataclass()
@@ -161,7 +173,7 @@ class Drawing:
 
         sprite_word = []
         for char in word:
-            sprite_word.append(character_sprites[char])
+            sprite_word.append(CHARACTER_SPRITES[char])
 
         for _ in range(5):
             row_string = ''
@@ -171,7 +183,6 @@ class Drawing:
                 row_string += graphic_row
             row_string = row_string.center(TERMINAL_WIDTH)
             Drawing.draw_ticker_row(row_string)
-        time.sleep(3)
 
     @classmethod
     def draw_window(cls, entry: Entry) -> None:
@@ -243,19 +254,7 @@ class Entries:
         Drawing.draw_window(cls.ENTRIES[cls.current_entry])
 
 
-character_sprites = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
-                     't': [0x4, 0xE, 0x4, 0x4, 0x4],
-                     'h': [0xA, 0xA, 0xE, 0xA, 0xA],
-                     'e': [0xE, 0x8, 0xE, 0x8, 0xE],
-                     'n': [0xE, 0xA, 0xA, 0xA, 0xA],
-                     'd': [0xC, 0xA, 0xA, 0xA, 0xC],
-                     ' ': [0x0, 0x0, 0x0, 0x0, 0x0],
-                     'i': [0x4, 0x4, 0x4, 0x4, 0x4],
-                     'r': [0xE, 0xA, 0x8, 0x8, 0x8],
-                     'o': [0xE, 0xA, 0xA, 0xA, 0xE],
-                     '.': [0x0, 0x0, 0x0, 0x0, 0x4],
-                     'p': [0xE, 0xA, 0xE, 0x8, 0x8],
-                     'y': [0xA, 0xA, 0xE, 0x4, 0x4]}
+
 
 
 class ColorEscapeSequences:
@@ -316,37 +315,6 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     book = '1F4D6'
     thanks = '1F64F'
     alien = '1F47D'
-
-def introduction():
-    pass
-    # Hemophilia
-    # Age
-    # Programming
-    # Major
-    # Study Interests
-    # Fishing
-    # Baseball
-    # Arcade Games
-    # Media Genres
-    # Job
-
-# def main() -> None:
-#     """Main program entry."""
-#     Drawing.print_character_sprite('intro.py')
-#     Drawing.draw_ticker_row()
-#     Drawing.draw_ticker_row()
-#     # Drawing.draw_ticker_row()
-#     Drawing.draw_ticker_row('Controls:'.center(terminal_width))
-#     Drawing.draw_ticker_row('[N]ext'.center(terminal_width))
-#     Drawing.draw_ticker_row('[B]back'.center(terminal_width))
-#     Drawing.draw_ticker_row('[E]xit'.center(terminal_width))
-#     Drawing.draw_ticker_row('Press Enter to continue: '.center(terminal_width))
-#     input('? ')
-    # TODO: Figure out I'm going to organize 'entries'. Probably a list or dict. List makes more sense.
-    # Drawing.draw_window()
-    # Print instructions
-    # Open first entry w/ prompt for movement.
-
 
 
 # TODO This pattern is straight from the docs and modified. Figure out why it said os is deprecated.
