@@ -4,6 +4,7 @@ TODO:
     * Move post title sleep outside of title function for better control.
     * Write 10 'Entries'.
     * Verify entry sizing.
+
     * Write new main function that reflects current state of program.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
 
@@ -382,17 +383,17 @@ if __name__ == '__main__':
     print(len(ENTRY_CONTENTS['thank_you']))
 
 
-    # Drawing.print_character_sprite('intro.py')
-    # Drawing.draw_ticker_row()
-    # Drawing.draw_ticker_row()
-    # Drawing.draw_ticker_row()
-    # Drawing.draw_ticker_row('Controls:'.center(TERMINAL_WIDTH))
-    # Drawing.draw_ticker_row('[N]ext'.center(TERMINAL_WIDTH))
-    # Drawing.draw_ticker_row('[B]ack'.center(TERMINAL_WIDTH))
-    # Drawing.draw_ticker_row('[E]xit'.center(TERMINAL_WIDTH))
-    # Drawing.draw_ticker_row('Press Enter to continue: '.center(TERMINAL_WIDTH))
-    # input()
-    # clear_console()
+    Drawing.print_character_sprite('intro.py')
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row('Controls:'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[N]ext'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[B]ack'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[E]xit'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('Press Enter to continue: '.center(TERMINAL_WIDTH))
+    input()
+    clear_console()
     print(ColorEscapeSequences.PHOSPHORGREEN)
 
     # test_data = """Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
