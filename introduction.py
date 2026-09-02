@@ -20,11 +20,11 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                                  "joints and muscles. It caused me to miss quite a bit of school in my late teens. "
                                  "It's also the reason I was not able to attend college until now. I've always wanted "
                                  "to continue my education after high school, but the state of my health just "
-                                 "didn't allow it. Recently, the medicine I use to treat the condition has improved "
+                                 "didn't allow it. Recently, the medicine I use to treat my condition has improved "
                                  "quite a bit and as a result I'm finally able to attend in-person classes. "
                                  "Honestly, I'm ecstatic everyday knowing I get to go to school."),
 
-                  'age': ("I'm a non traditional student, with this being my first semester at 31."
+                  'age': ("I'm a non traditional student, with this being my first semester at 31. "
                           "As I mentioned, I was unable to attend school for many years, and as a result I'm getting "
                           "a late start. It's hard not to feel like I'm already behind, even though I've just started. "
                           "Although, in some ways, I'm thankful to just be starting. I'm a much different person than "
@@ -34,13 +34,13 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                   'ai': ("AI scares the absolute crap out of me. It is also among the coolest things I've been alive "
                          "to see the advent of. I believe one day this era will be looked at similar to the adoption "
                          "of stored program computers, or that first keyboard being introduced to the Whirl Wind project. "
-                         "Its one of the largest shifts ever in how humans will interface with computers in the future."
+                         "Its one of the largest shifts ever in how humans will interface with computers in the future. "
                          "Its amazing at searching documentation, acting as a sounding board(rubber ducking), and "
-                         "providing basic usage examples for 3rd party libraries APIs. I use it quite a bit for those "
-                         "things specifically in the last few months. It can really save a lot of time in those tasks."
+                         "providing basic usage examples for 3rd party libraries APIs. I've used it quite a bit, for those "
+                         "things specifically, in the last few months. It can really save a lot of time in those tasks. "
                          "All that being said, it still scares the crap out of me. It should scare anyone who's ever "
                          "written a line of code before its advent. I realized very quickly you can't use it for code "
-                         "generation, if you want to learn anything anyway. You don't bring a forklift to the gym."
+                         "generation, if you want to learn anything anyway. You don't bring a forklift to the gym. "
                          "As a result, I actually have little(no) experience with AI workflows or anything like that. "
                          "Tooling changes often, and I can always learn it later."),
 
@@ -58,11 +58,12 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                             "networking. It occurred to me, I knew quite a bit about high level "
                             "programming(both functional and object oriented), but painfully little about much else in "
                             "the realm of computer science. So, I started learning C to learn about low level "
-                            "memory management, and embedded systems. I started working on the nand2Tetris project to "
+                            "memory management and embedded systems. I started working on the nand2Tetris project to "
                             "learn about digital design. I'm currently wrestling with De Morgan's law and boolean "
                             "algebra. For networking, I'm learning about the OSI model and its various layers. These "
                             "areas of interest and all I've learned about them recently helped push me towards "
-                            "Computer Engineering."),
+                            "Computer Engineering. I love to program, so I'd never want to focus fully on FPGAs or "
+                            "networking, but a mixed role would be interesting."),
 
                   'fishing': ("Outside of computer related things, I only have a few hobbies I really enjoy. One of "
                               "them is bass fishing. I like fishing in general, but Largemouth and Smallmouth Bass "
@@ -70,14 +71,14 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                               "from it for some time. When my health started to improve I decided to try bass fishing "
                               "and got hooked(pun intended). One of the things I'm most looking forward to when I "
                               "start my career, will be purchasing my first bass boat. Oddly enough, bass fishing also "
-                              "helped push me towards Computer Engineering. There's some cool work being done with "
+                              "helped push me towards Computer Engineering. There's cool work being done with "
                               "'Live Scope', a real time sonar system. There's work involving FPGAs, ASICs, and "
                               "embedded systems."),
 
                   'baseball': ("Another non computer related hobby of mine is baseball. I try to catch as many games "
                                "as I can on TV. I'm a White Sox fan, although I follow a number of other teams. My "
                                "favorite active player on the Sox is Sam Antonacci. I've rarely seen anyone do "
-                               "much of anything in life with the effort he puts in every play. As I fan, I appreciate "
+                               "much of anything in life with the effort he puts in every play. As a fan, I appreciate "
                                "that more than the result."),
 
                   'arcade': ("I've enjoyed video games as long as I can remember. My earliest memories include playing "
@@ -88,17 +89,18 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                              "deceptive difficulty, makes them timeless. My love of arcade games is why I'm interested "
                              "in FPGAs. The MiSTer project, which attempts to recreate various arcade hardware using "
                              "FPGAs, is what drew me to them. This is one of the main things that pushed me towards "
-                             "Computer Engineering as a major."),
+                             "Computer Engineering as a major. The project is open source, and I hope to be able to "
+                             "contribute to it one day."),
 
-                  'genres': ("My favorite genre across all forms of media, is scifi. I enjoy fantasy and historical "
+                  'genres': ("My favorite genre across all forms of media is scifi. I enjoy fantasy and historical "
                              "dramas, but scifi trounces everything else. My dad grew up on Star Trek, and he passed "
                              "it right on down to me. I've seen each of the Star Trek series more times than I care to "
-                             "admit, with my favorite being Next Generation. I spend more time reading scifi, than "
+                             "admit, with my favorite being Next Generation. I spend more time reading scifi than "
                              "watching it nowadays. I've mostly been reading Star Trek and Star Wars lately, but "
                              "I'll read just about anything scifi if it catches my interest. Since this entry is about "
                              "genres of media I like, I'll finish with music. I like all types of music. Some of the "
-                             "more unexpected genres I enjoy are country, 80s Japanese city pop, and Spanish guitar. "
-                             "I've been listening to Andalusian Nights by Govi lately. Finding new music I enjoy is "
+                             "more unexpected genres I enjoy are: Country, 80s Japanese City Pop, and Spanish Guitar. "
+                             "I've been listening to Andalusian Nights(1999) by Govi lately. Finding new music is "
                              "one of the things I get the most joy out of."),
 
                   'computers': ("I love computers. I love absolutely everything about them. If you had asked for one "
@@ -106,7 +108,8 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                                 "love programming, the history of them, the hardware, the theory. I love it all and I "
                                 "want to know it all. They got me through the roughest parts of my life. Sometimes they "
                                 "were my entertainment, other times they were my teacher. I met my two best friends "
-                                "playing World of Warcraft when we were 12. They are going to be how I make my living."),
+                                "playing World of Warcraft when we were 12. They are going to be how I make my living "
+                                "one day."),
 
                   'thank_you': (
                       "Well, thank you for reading all of that. I ended up enjoying this project quite a bit. "
