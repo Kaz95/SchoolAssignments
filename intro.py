@@ -1,5 +1,9 @@
 """A program introducing myself.
 
+Not sure exactly what I was going for with the theme. I had paper tape and teletypes on my mind while making the intro
+and outro. With the entries I was thinking of old dumb terminals.
+
+
 TODO:
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
 """
