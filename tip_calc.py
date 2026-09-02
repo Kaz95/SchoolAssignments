@@ -1,9 +1,9 @@
 """A tip calculator program.
 
 TODO:
-    * Get Panera green using RGB values.
-    * Re implement window drawing method to create calc window.
-    * Flesh out greeting before and after logo
+    * Figure out how to draw the Panera Logo. Current thought is downscaling the image and then taking the bitmap.
+    *   I also need to increase resolution. Look into other methods of drawing pixels discovered during last project.
+    *   Such as using horizontal half blocks with foreground and background colors.
     * Solidify the UI of the tip calc.
     * Calc tax
 
