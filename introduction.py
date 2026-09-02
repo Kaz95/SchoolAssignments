@@ -1,10 +1,7 @@
 """A program introducing myself.
 
 TODO:
-    * Proof read entries.
-    * Verify entry sizing.
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
-
 """
 import time, textwrap
 import subprocess
@@ -310,7 +307,6 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     baseball = '26BE'
     joystick = r'1F579\uFE0F'
     planet = '1F30C'
-    briefcase = '1F4BC'
     robot = '1F916'
     book = '1F4D6'
     thanks = '1F64F'
