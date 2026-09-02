@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 # GLOBAL CONSTANTS
 TERMINAL_WIDTH = 80
+GITHUB = "https://github.com/Kaz95"
 
 ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
                                  "much detail here due to space constraints, but it generally manifests in swollen "
@@ -326,9 +327,11 @@ def clear_console() -> None:
     subprocess.run(command, shell=True)
 
 
-def format_text(text):
+def format_text(text, link=None):
     text = textwrap.wrap(text, width=78)
     text = [line.ljust(78) for line in text]
+    if link:
+        text.append(f'{GITHUB}'.center(78))
     return text
 
 
@@ -360,7 +363,7 @@ def view_entries():
     Entries.create_entry(7, 'Arcade', EmojiUnicodes.joystick, format_text(ENTRY_CONTENTS['arcade']))
     Entries.create_entry(8, 'Genres', EmojiUnicodes.alien, format_text(ENTRY_CONTENTS['genres']))
     Entries.create_entry(9, 'Computers', EmojiUnicodes.computer, format_text(ENTRY_CONTENTS['computers']))
-    Entries.create_entry(10, 'Thank You', EmojiUnicodes.thanks, format_text(ENTRY_CONTENTS['thank_you']))
+    Entries.create_entry(10, 'Thank You', EmojiUnicodes.thanks, format_text(ENTRY_CONTENTS['thank_you'], link=True))
 
     Entries.print_entry()
     while True:
