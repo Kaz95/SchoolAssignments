@@ -216,7 +216,7 @@ class Drawing:
     def draw_ticker_row(cls, row_contents: str = ' ' * 80) -> None:
         """Draw paper tape ticks, with contents centered within."""
         print(cls.circle, row_contents, cls.circle)
-        time.sleep(1)
+        time.sleep(.75)
 
 
 class Entries:
@@ -333,12 +333,14 @@ def format_text(text):
 
 
 def run_intro():
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
     Drawing.print_character_sprite('intro.py')
     Drawing.draw_ticker_row()
     Drawing.draw_ticker_row()
     Drawing.draw_ticker_row()
     Drawing.draw_ticker_row('Controls:'.center(TERMINAL_WIDTH))
-    Drawing.draw_ticker_row('[N]ext'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('Enter/Return: Next'.center(TERMINAL_WIDTH))
     Drawing.draw_ticker_row('[B]ack'.center(TERMINAL_WIDTH))
     Drawing.draw_ticker_row('[E]xit'.center(TERMINAL_WIDTH))
     Drawing.draw_ticker_row('Press Enter to continue: '.center(TERMINAL_WIDTH))
@@ -368,6 +370,9 @@ def view_entries():
         if direction.lower() == 'b':
             Entries.prev_entry()
 
+        elif direction.lower() == 'e':
+            break
+
         else:
             if not Entries.next_entry():
                 break
@@ -387,4 +392,3 @@ if __name__ == '__main__':
     view_entries()
     run_outro()
 
-    print(len(ENTRY_CONTENTS['thank_you']))
