@@ -5,6 +5,7 @@ TODO:
     * Re implement window drawing method to create calc window.
     * Flesh out greeting before and after logo
     * Solidify the UI of the tip calc.
+    * Calc tax
 
 
 """
