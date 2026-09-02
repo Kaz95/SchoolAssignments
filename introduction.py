@@ -384,8 +384,7 @@ def run_outro():
     Drawing.print_character_sprite('The end')
 
 
-# Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
-# That way I (or you) only need to move one line.
+# I checked to make sure the main idiom worked in OnlineGDB. Hope this isn't a problem.
 if __name__ == '__main__':
     run_intro()
     view_entries()
