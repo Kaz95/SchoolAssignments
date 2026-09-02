@@ -228,6 +228,7 @@ class Entries:
 
     @classmethod
     def create_entry(cls, ordinal, subject, emoji, contents):
+        """Create entry and append to ENTRIES."""
         cls.ENTRIES.append(Entry(ordinal, subject, emoji, contents))
 
 
