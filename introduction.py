@@ -91,15 +91,15 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                              "Computer Engineering as a major."),
 
                   'genres': ("My favorite genre across all forms of media, is scifi. I enjoy fantasy and historical "
-                            "dramas, but scifi trounces everything else. My dad grew up on Star Trek, and he passed "
-                            "it right on down to me. I've seen each of the Star Trek series more times than I care to "
-                            "admit, with my favorite being Next Generation. I spend more time reading scifi, than "
-                            "watching it nowadays. I've mostly been reading Star Trek and Star Wars lately, but "
-                            "I'll read just about anything scifi if it catches my interest. Since this entry is about "
-                            "genres of media I like, I'll finish with music. I like all types of music. Some of the "
-                            "more unexpected genres I enjoy are country, 80s Japanese city pop, and Spanish guitar. "
-                            "I've been listening to Andalusian Nights by Govi lately. Finding new music I enjoy is "
-                            "one of the things I get the most joy out of."),
+                             "dramas, but scifi trounces everything else. My dad grew up on Star Trek, and he passed "
+                             "it right on down to me. I've seen each of the Star Trek series more times than I care to "
+                             "admit, with my favorite being Next Generation. I spend more time reading scifi, than "
+                             "watching it nowadays. I've mostly been reading Star Trek and Star Wars lately, but "
+                             "I'll read just about anything scifi if it catches my interest. Since this entry is about "
+                             "genres of media I like, I'll finish with music. I like all types of music. Some of the "
+                             "more unexpected genres I enjoy are country, 80s Japanese city pop, and Spanish guitar. "
+                             "I've been listening to Andalusian Nights by Govi lately. Finding new music I enjoy is "
+                             "one of the things I get the most joy out of."),
 
                   'computers': ("I love computers. I love absolutely everything about them. If you had asked for one "
                                 "thing about myself, that's what I would have said. Its, by far, the most important. I "
@@ -108,26 +108,26 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                                 "were my entertainment, other times they were my teacher. I met my two best friends "
                                 "playing World of Warcraft when we were 12. They are going to be how I make my living."),
 
-                  'thank_you': ("Well, thank you for reading all of that. I ended up enjoying this project quite a bit. "
-                                "Sometimes its easier to learn about yourself by telling someone else, I suppose. I "
-                                "think you've come up with a great class format. I was a bit harsh on the zybook "
-                                "lessons at first, but I realized I needed to look through the eyes of a beginner. "
-                                "The visual examples are really fantastic and would have been a great aid to me when "
-                                "I started. I love that you allow us to work at our own pace. It allowed me to gauge "
-                                "how much time I would be able to spend on this project. I spent the second half of one "
-                                "of our lab days working on this project under a nice tree, in front of one of the "
-                                "ponds on campus. I've never even programmed outside the house before. That was a "
-                                "really nice day. So, thanks for the attendance policy! It allowed me to enjoy "
-                                "something new. I'll close with a link to my github, where you will find my most "
-                                "recent completed project, and my current project. The completed project is a full "
-                                "stack desktop app I made to ease working with multiple versions of arcade game "
-                                "emulators. My current project is my first attempt at making an emulator of my own."
-                                "That project is where I got the idea for the 'bit-mapped' graphics in this project."
-                                "If there are ever any opportunities you think I may be a good fit for, please let me "
-                                "know. Tutoring, help desk, local internships; Whatever it is, I'm interseted.")
+                  'thank_you': (
+                      "Well, thank you for reading all of that. I ended up enjoying this project quite a bit. "
+                      "Sometimes its easier to learn about yourself by telling someone else, I suppose. I "
+                      "think you've come up with a great class format. I was a bit harsh on the zybook "
+                      "lessons at first, but I realized I needed to look through the eyes of a beginner. "
+                      "The visual examples are really fantastic and would have been a great aid to me when "
+                      "I started. I love that you allow us to work at our own pace. It allowed me to gauge "
+                      "how much time I would be able to spend on this project. I spent the second half of one "
+                      "of our lab days working on this project under a nice tree, in front of one of the "
+                      "ponds on campus. I've never even programmed outside the house before. That was a "
+                      "really nice day. So, thanks for the attendance policy! It allowed me to enjoy "
+                      "something new. I'll close with a link to my github, where you will find my most "
+                      "recent completed project, and my current project. The completed project is a full "
+                      "stack desktop app I made to ease working with multiple versions of arcade game "
+                      "emulators. My current project is my first attempt at making an emulator of my own."
+                      "That project is where I got the idea for the 'bit-mapped' graphics in this project."
+                      "If there are ever any opportunities you think I may be a good fit for, please let me "
+                      "know. Tutoring, help desk, local internships; Whatever it is, I'm interseted.")
 
                   }
-
 
 CHARACTER_SPRITES = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
                      't': [0x4, 0xE, 0x4, 0x4, 0x4],
@@ -162,10 +162,10 @@ class Drawing:
     horiz = "\u2500"  # ─
     vert = "\u2502"  # │
     half_block = "\u2588"  # █
-    circle = '\u2B24' # ⬤
+    circle = '\u2B24'  # ⬤
 
     @classmethod
-    def print_character_sprite(cls, word:str) -> None:
+    def print_character_sprite(cls, word: str) -> None:
         """Draw character sprite base on given sprite data."""
 
         # Need to double up to maintain square aspect ratio
@@ -219,6 +219,7 @@ class Drawing:
         print(cls.circle, row_contents, cls.circle)
         time.sleep(1)
 
+
 class Entries:
     """Class to handle working with entries.
 
@@ -231,7 +232,6 @@ class Entries:
     def create_entry(cls, ordinal, subject, emoji, contents):
         """Create entry and append to ENTRIES."""
         cls.ENTRIES.append(Entry(ordinal, subject, emoji, contents))
-
 
     @classmethod
     def next_entry(cls) -> bool:
@@ -256,9 +256,6 @@ class Entries:
         Drawing.draw_window(cls.ENTRIES[cls.current_entry])
 
 
-
-
-
 class ColorEscapeSequences:
     """Enumerated ANSI escape sequences.
 
@@ -275,6 +272,7 @@ class ColorEscapeSequences:
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
     """EmojiUnicodes Metaclass."""
+
     # Trying to add this to class or references just about any way other than class level static method causes recursion
     # I mostly understand why, but I need to look into it more. TODO: Fully understand class lookup.
     @staticmethod
@@ -328,10 +326,12 @@ def clear_console() -> None:
         command = 'clear'
     subprocess.run(command, shell=True)
 
+
 def format_text(text):
     text = textwrap.wrap(text, width=78)
     text = [line.ljust(78) for line in text]
     return text
+
 
 def run_intro():
     Drawing.print_character_sprite('intro.py')
@@ -346,6 +346,7 @@ def run_intro():
     input()
     clear_console()
     print(ColorEscapeSequences.PHOSPHORGREEN)
+
 
 def view_entries():
     Entries.create_entry(0, 'Hemophilia', EmojiUnicodes.blood, format_text(ENTRY_CONTENTS['hemophilia']))
@@ -374,9 +375,11 @@ def view_entries():
 
         Entries.print_entry()
 
+
 def run_outro():
     print(ColorEscapeSequences.RESET)
     Drawing.print_character_sprite('The end')
+
 
 # Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
 # That way I (or you) only need to move one line.
@@ -385,8 +388,4 @@ if __name__ == '__main__':
     view_entries()
     run_outro()
 
-
     print(len(ENTRY_CONTENTS['thank_you']))
-
-
-
