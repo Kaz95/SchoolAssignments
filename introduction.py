@@ -6,14 +6,13 @@ TODO:
     * Come up with a better git workflow. Squashing conflicts too often working from laptop.
 
 """
-import shutil, time, textwrap
+import time, textwrap
 import subprocess
 import sys
 from dataclasses import dataclass
 
 # GLOBAL CONSTANTS
-
-TERMINAL_WIDTH, TERMINAL_HEIGHT = shutil.get_terminal_size()
+TERMINAL_WIDTH = 80
 
 ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder called Hemophilia. I won't go into "
                                  "much detail here due to space constraints, but it generally manifests in swollen "
