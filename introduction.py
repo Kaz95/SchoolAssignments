@@ -167,6 +167,7 @@ class Drawing:
     @classmethod
     def print_character_sprite(cls, word:str) -> None:
         """Draw character sprite base on given sprite data."""
+
         # Need to double up to maintain square aspect ratio
         full_block = cls.half_block * 2
         double_space = "  "
@@ -331,12 +332,22 @@ def format_text(text):
     text = textwrap.wrap(text, width=78)
     text = [line.ljust(78) for line in text]
     return text
-    # FIXME: Write text formatter for entries.
 
-# Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
-# That way I (or you) only need to move one line.
-if __name__ == '__main__':
-    # main()
+def run_intro():
+    Drawing.print_character_sprite('intro.py')
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row()
+    Drawing.draw_ticker_row('Controls:'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[N]ext'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[B]ack'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('[E]xit'.center(TERMINAL_WIDTH))
+    Drawing.draw_ticker_row('Press Enter to continue: '.center(TERMINAL_WIDTH))
+    input()
+    clear_console()
+    print(ColorEscapeSequences.PHOSPHORGREEN)
+
+def view_entries():
     Entries.create_entry(0, 'Hemophilia', EmojiUnicodes.blood, format_text(ENTRY_CONTENTS['hemophilia']))
     Entries.create_entry(1, 'Age', EmojiUnicodes.clock, format_text(ENTRY_CONTENTS['age']))
     Entries.create_entry(2, 'AI', EmojiUnicodes.robot, format_text(ENTRY_CONTENTS['ai']))
@@ -348,6 +359,32 @@ if __name__ == '__main__':
     Entries.create_entry(8, 'Genres', EmojiUnicodes.alien, format_text(ENTRY_CONTENTS['genres']))
     Entries.create_entry(9, 'Computers', EmojiUnicodes.computer, format_text(ENTRY_CONTENTS['computers']))
     Entries.create_entry(10, 'Thank You', EmojiUnicodes.thanks, format_text(ENTRY_CONTENTS['thank_you']))
+
+    Entries.print_entry()
+    while True:
+        direction = input('? ')
+        clear_console()
+
+        if direction.lower() == 'b':
+            Entries.prev_entry()
+
+        else:
+            if not Entries.next_entry():
+                break
+
+        Entries.print_entry()
+
+def run_outro():
+    print(ColorEscapeSequences.RESET)
+    Drawing.print_character_sprite('The end')
+
+# Not sure if the use of the '__main__' idiom for entry is OK? I created a main() function just incase.
+# That way I (or you) only need to move one line.
+if __name__ == '__main__':
+    run_intro()
+    view_entries()
+    run_outro()
+
 
     print(len(ENTRY_CONTENTS['thank_you']))
 
