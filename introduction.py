@@ -115,17 +115,14 @@ ENTRY_CONTENTS = {'hemophilia': ("I was born with a genetic bleeding disorder ca
                       "lessons at first, but I realized I needed to look through the eyes of a beginner. "
                       "The visual examples are really fantastic and would have been a great aid to me when "
                       "I started. I love that you allow us to work at our own pace. It allowed me to gauge "
-                      "how much time I would be able to spend on this project. I spent the second half of one "
-                      "of our lab days working on this project under a nice tree, in front of one of the "
-                      "ponds on campus. I've never even programmed outside the house before. That was a "
-                      "really nice day. So, thanks for the attendance policy! It allowed me to enjoy "
-                      "something new. I'll close with a link to my github, where you will find my most "
-                      "recent completed project, and my current project. The completed project is a full "
-                      "stack desktop app I made to ease working with multiple versions of arcade game "
-                      "emulators. My current project is my first attempt at making an emulator of my own."
-                      "That project is where I got the idea for the 'bit-mapped' graphics in this project."
+                      "how much time I would be able to spend on this project. I'll close with a link to my github, "
+                      "where you will find my most recent completed project, and my current project. "
+                      "I intend to list my school assignments there as well, but this one is a bit personal."
+                      "The completed project is a full stack desktop app I made to ease working with multiple "
+                      "versions of arcade game emulators. My current project is my first attempt at making an emulator "
+                      "of my own. That project is where I got the idea for the 'bit-mapped' graphics in this project. "
                       "If there are ever any opportunities you think I may be a good fit for, please let me "
-                      "know. Tutoring, help desk, local internships; Whatever it is, I'm interseted.")
+                      "know. Tutoring, help desk, local internships, clubs, whatever it is, I'm interseted.")
 
                   }
 
