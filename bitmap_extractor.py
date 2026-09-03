@@ -9,26 +9,51 @@ TODO:
     * Down size the image after I figure out aspect ratio. Don't forget to add some sort of pad row for odd row count.
     * Run the looping logic on the downsized image.
 """
+from pprint import pp, pprint
 
+import sys
 from PIL import Image
 
-TERMINAL_WIDTH = 80
+PIXEL = '\u2584'
+TARGET_HEIGHT = 44
+TARGET_WIDTH = 44
 
-img = Image.open(r"C:\Users\kazac\Downloads\Panera-Bread-Logo.png")
-img  = img.convert("RGB")
+img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
+img  = img.convert('RGB')
 width, height = img.size
 
 print(width)
 print(height)
 
-aspect_ratio = width / height
-target_height = TERMINAL_WIDTH * aspect_ratio
-print(aspect_ratio)
-print(target_height)
+downscaled_img = img.resize((TARGET_WIDTH, TARGET_HEIGHT), Image.Resampling.LANCZOS)
 
-# pixel_matrix = []
-# for y in range(height):
-#     row_of_pixels = []
-#     for x in range(width):
-#         r, g, b = img.getpixel((x,y))
-#         print(r, g, b)
+print(f'{downscaled_img.width}, {downscaled_img.height}')
+pixel_matrix = []
+for y_coord in range(TARGET_HEIGHT):
+    row_of_pixels = []
+    for x_coord in range(TARGET_WIDTH):
+        r, g, b = downscaled_img.getpixel((x_coord,y_coord))
+        row_of_pixels.append((r, g, b))
+    pixel_matrix.append(row_of_pixels)
+
+print(len(pixel_matrix[0]))
+
+
+def paint(bit_map):
+    for y in range(0, TARGET_HEIGHT, 2):
+        line = []
+        for x in range(TARGET_WIDTH):
+            top = bit_map[y][x]
+            bottom = bit_map[y + 1][x]
+
+            tr, tg, tb = top
+            br, bg, bb = bottom
+
+            ansi_background = f'\x1b[48;2;{tr};{tg};{tb}m'
+            ansi_foreground = f'\x1b[38;2;{br};{bg};{bb}m'
+
+            line.append(f'{ansi_background}{ansi_foreground}{PIXEL}')
+
+        sys.stdout.write(''.join(line) + '\x1b[0m\n')
+
+paint(pixel_matrix)
