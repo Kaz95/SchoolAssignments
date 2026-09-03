@@ -2,6 +2,12 @@
 
 Decided to make this a standalone script. I'll probably just include the final bitmap data in the final project. My
 hope is to be able to reuse this in the future, similar to the basic font set and drawing class I'm using.
+
+TODO:
+    * Figure out how I'm going to handle aspect ratio, given I have an assumed max height of 24 rows. I think that means
+        I need to hardcode that limit, instead of terminal width as the limiter. Don't forget each row = 2 pixels.
+    * Down size the image after I figure out aspect ratio. Don't forget to add some sort of pad row for odd row count.
+    * Run the looping logic on the downsized image.
 """
 
 from PIL import Image
