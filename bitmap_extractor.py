@@ -4,10 +4,10 @@ Decided to make this a standalone script. I'll probably just include the final b
 hope is to be able to reuse this in the future, similar to the basic font set and drawing class I'm using.
 
 TODO:
-    * Figure out how I'm going to handle aspect ratio, given I have an assumed max height of 24 rows. I think that means
-        I need to hardcode that limit, instead of terminal width as the limiter. Don't forget each row = 2 pixels.
-    * Down size the image after I figure out aspect ratio. Don't forget to add some sort of pad row for odd row count.
-    * Run the looping logic on the downsized image.
+    *...Kinda surprised that works...Not sure what to do next actually. I guess I need to reduce blur on the resulting
+        image. I read some stuff about color palette reduction. Guess that's next.
+    * Looks like I'm gonna need some math. Look into 3D color space and Euclidean distance. I think I'm doing this
+        in my math class currently actually. Small world.
 """
 from pprint import pp, pprint
 
