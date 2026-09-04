@@ -6,11 +6,8 @@ hope is to be able to reuse this in the future, similar to the basic font set an
 TODO:
     *...Kinda surprised that works...Not sure what to do next actually. I guess I need to reduce blur on the resulting
         image.
-    * Color palette reduction isn't going to work at low resolution. I need to increase resolution. That will clear
-        up the image naturally. Not sure about terminal boundaries though. I want the image to fit without scrolling.
-        The image looks great at 100x100(50 lines), but quite blurry at 50x50(25 lines).
-    * Center image. My normal .center() method wont work because of the color codes built into my F-strings. Need a work
-        around, or I will have to manually pad.
+    * Decide on final resolution. 100x100(50 lines) is current front runner.
+    * Test new centering logic in alternate environments....I think it works...
     * Consider implementing linear interpolation for fade effects. I learned enough to do it, not sure if I'll have time
     * Look more into overwriting the terminal and manually flushing buffer to avoid overhead/flicker of clearing it.
 """
