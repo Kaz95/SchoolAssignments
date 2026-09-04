@@ -5,9 +5,12 @@ hope is to be able to reuse this in the future, similar to the basic font set an
 
 TODO:
     *...Kinda surprised that works...Not sure what to do next actually. I guess I need to reduce blur on the resulting
-        image. I read some stuff about color palette reduction. Guess that's next.
-    * Looks like I'm gonna need some math. Look into 3D color space and Euclidean distance. I think I'm doing this
-        in my math class currently actually. Small world.
+        image.
+    * Color palette reduction isn't going to work at low resolution. I need to increase resolution. That will clear
+        up the image naturally. Not sure about terminal boundaries though. I want the image to fit without scrolling.
+        The image looks great at 100x100(50 lines), but quite blurry at 50x50(25 lines).
+    * Center image. My normal .center() method wont work because of the color codes built into my F-strings. Need a work
+        around, or I will have to manually pad.
 """
 from pprint import pp, pprint
 
@@ -15,8 +18,8 @@ import sys
 from PIL import Image
 
 PIXEL = '\u2584'
-TARGET_HEIGHT = 44
-TARGET_WIDTH = 44
+TARGET_HEIGHT = 50
+TARGET_WIDTH = 50
 
 img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
 img  = img.convert('RGB')
