@@ -4,6 +4,7 @@ TODO:
     * Solidify the UI of the tip calc. Nothing too similar to last project. Probably no use of time.sleep().
         Tip calc should be snappy.
     * Calc tax
+    * Decide final project layout. Am I hardcoding bitmap or copying my extractor code into this module?
 
 
 """
