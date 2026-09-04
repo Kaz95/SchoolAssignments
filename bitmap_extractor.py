@@ -11,6 +11,8 @@ TODO:
         The image looks great at 100x100(50 lines), but quite blurry at 50x50(25 lines).
     * Center image. My normal .center() method wont work because of the color codes built into my F-strings. Need a work
         around, or I will have to manually pad.
+    * Consider implementing linear interpolation for fade effects. I learned enough to do it, not sure if I'll have time
+    * Look more into overwriting the terminal and manually flushing buffer to avoid overhead/flicker of clearing it.
 """
 from pprint import pp, pprint
 
