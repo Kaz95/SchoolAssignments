@@ -16,12 +16,14 @@ TODO:
 """
 from pprint import pp, pprint
 
-import sys
+import sys, shutil
 from PIL import Image
 
+
+TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 PIXEL = '\u2584'
-TARGET_HEIGHT = 50
-TARGET_WIDTH = 50
+TARGET_HEIGHT = 100
+TARGET_WIDTH = 100
 
 img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
 img  = img.convert('RGB')
@@ -45,8 +47,11 @@ print(len(pixel_matrix[0]))
 
 
 def paint(bit_map):
+    pad_length = (TERMINAL_WIDTH - TARGET_WIDTH) // 2
+    padding = ' ' * pad_length
+    print(len(padding))
     for y in range(0, TARGET_HEIGHT, 2):
-        line = []
+        line = [padding]
         for x in range(TARGET_WIDTH):
             top = bit_map[y][x]
             bottom = bit_map[y + 1][x]
