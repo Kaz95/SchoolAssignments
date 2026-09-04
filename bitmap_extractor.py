@@ -11,11 +11,9 @@ TODO:
     * Consider implementing linear interpolation for fade effects. I learned enough to do it, not sure if I'll have time
     * Look more into overwriting the terminal and manually flushing buffer to avoid overhead/flicker of clearing it.
 """
-from pprint import pp, pprint
-
-import sys, shutil
+import shutil
 from PIL import Image
-
+from paint import paint
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 PIXEL = '\u2584'
@@ -43,24 +41,6 @@ for y_coord in range(TARGET_HEIGHT):
 print(len(pixel_matrix[0]))
 
 
-def paint(bit_map):
-    pad_length = (TERMINAL_WIDTH - TARGET_WIDTH) // 2
-    padding = ' ' * pad_length
-    print(len(padding))
-    for y in range(0, TARGET_HEIGHT, 2):
-        line = [padding]
-        for x in range(TARGET_WIDTH):
-            top = bit_map[y][x]
-            bottom = bit_map[y + 1][x]
 
-            tr, tg, tb = top
-            br, bg, bb = bottom
 
-            ansi_background = f'\x1b[48;2;{tr};{tg};{tb}m'
-            ansi_foreground = f'\x1b[38;2;{br};{bg};{bb}m'
-
-            line.append(f'{ansi_background}{ansi_foreground}{PIXEL}')
-
-        sys.stdout.write(''.join(line) + '\x1b[0m\n')
-
-paint(pixel_matrix)
+paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
