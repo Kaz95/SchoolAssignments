@@ -1,15 +1,8 @@
 """A tip calculator program.
 
 TODO:
-    * Figure out how to draw the Panera Logo. Current thought is downscaling the image and then taking the bitmap.
-        I also need to increase resolution. Look into other methods of drawing pixels discovered during last project.
-        Such as using horizontal half blocks with foreground and background colors. If I can get the resolution high
-        enough, I can draw the entire logo including the name in one pass. If not I can always do name the old way
-        and have it appear after the logo.
-    *
     * Solidify the UI of the tip calc. Nothing too similar to last project. Probably no use of time.sleep().
         Tip calc should be snappy.
-    *
     * Calc tax
 
 
