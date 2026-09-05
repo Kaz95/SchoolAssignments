@@ -65,6 +65,33 @@ class Drawing:
 
     @classmethod
     def draw_window(cls) -> None:
+        print(cls.top_left + cls.horiz * 78 + cls.top_right)
+        for _ in range(15):
+
+            if _ == 0:
+                subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
+                print(subject.center(80))
+
+            elif _ == 1:
+                print(cls.vert + cls.horiz * 78 + cls.vert)
+
+            elif _ == 5:
+                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
+
+            elif _ == 9:
+                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
+
+            elif _ == 13:
+                print(cls.vert + cls.horiz * 78 + cls.vert)
+
+            elif _ == 14:
+                print(cls.vert + ' ' * 78 + cls.vert)
+            else:
+                print(cls.vert + cls.vert.center(78) + cls.vert)
+        print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
+        input('? ')
+
+
         # TODO: Will need completely rework this method. Should draw the tip calc.
         pass
         # """Draw a 'window' with boarder Unicode characters."""
@@ -167,7 +194,4 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
 
 
 if __name__ == '__main__':
-    print(ColorEscapeSequences.GREEN)
-    Drawing.print_character_sprite('PANERA')
-    Drawing.draw_ticker_row(emoji=True)
-    Drawing.print_character_sprite('BREAD')
+    Drawing.draw_window()
