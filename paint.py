@@ -9,7 +9,7 @@ import time
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 
-BLACK = (0, 0, 0)
+TERMINAL_BLACK = (12, 12, 12)
 PIXEL = '\u2584'
 
 # ANSI escapes
@@ -62,8 +62,8 @@ def paint_a_frame(bit_map, progress, terminal_width):
             original_top = bit_map[y][x]
             original_bottom = bit_map[y + 1][x]
 
-            top_rgb = lerp(original_top, BLACK, progress)
-            bot_rgb = lerp(original_bottom, BLACK, progress)
+            top_rgb = lerp(original_top, TERMINAL_BLACK, progress)
+            bot_rgb = lerp(original_bottom, TERMINAL_BLACK, progress)
 
             bg_ansi = f"\x1b[48;2;{top_rgb[0]};{top_rgb[1]};{top_rgb[2]}m"
             fg_ansi = f"\x1b[38;2;{bot_rgb[0]};{bot_rgb[1]};{bot_rgb[2]}m"

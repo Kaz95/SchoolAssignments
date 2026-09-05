@@ -42,5 +42,5 @@ print(len(pixel_matrix[0]))
 
 
 
-paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
-# play_animation_sequence(pixel_matrix, 60, 0.05)
+# paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
+play_animation_sequence(pixel_matrix, 60, 0.05)
