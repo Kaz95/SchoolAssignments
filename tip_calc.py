@@ -1,9 +1,11 @@
 """A tip calculator program.
 
 TODO:
-    * Solidify the UI of the tip calc. Nothing too similar to last project. Probably no use of time.sleep().
-        Tip calc should be snappy.
+    * Decided to keep UI basic and usable. Will leave for time to play with graphics. Add functions for adding values
+    * Decided to keep UI basic and usable. Will leave for time to play with graphics. Add functions for adding values
+        to each window. Probably want a function to format data because 6 similar layouts.
     * Calc tax
+    * Allow change in preset tip %?
     * Decide final project layout. Am I hardcoding bitmap or copying my extractor code into this module?
 
 
