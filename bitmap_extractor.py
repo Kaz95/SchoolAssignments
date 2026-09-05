@@ -16,7 +16,7 @@ from PIL import Image
 from paint import paint
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
-PIXEL = '\u2584'
+
 TARGET_HEIGHT = 100
 TARGET_WIDTH = 100
 

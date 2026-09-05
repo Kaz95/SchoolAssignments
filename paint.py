@@ -5,6 +5,7 @@ I'm going to want to reuse this for future projects, but I'm not sure how I will
 """
 import sys
 
+PIXEL = '\u2584'
 
 def paint(bit_map, terminal_width,target_height, target_width):
     pad_length = (terminal_width - target_width) // 2
