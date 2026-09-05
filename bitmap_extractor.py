@@ -13,7 +13,7 @@ TODO:
 """
 import shutil
 from PIL import Image
-from paint import paint
+from paint import play_animation_sequence, paint
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 
@@ -44,3 +44,4 @@ print(len(pixel_matrix[0]))
 
 
 paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
+# play_animation_sequence(pixel_matrix, 60, 0.05)
