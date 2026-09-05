@@ -2,7 +2,6 @@
 
 TODO:
     * Decided to keep UI basic and usable. Will leave for time to play with graphics. Add functions for adding values
-    * Decided to keep UI basic and usable. Will leave for time to play with graphics. Add functions for adding values
         to each window. Probably want a function to format data because 6 similar layouts.
     * Calc tax
     * Allow change in preset tip %?
