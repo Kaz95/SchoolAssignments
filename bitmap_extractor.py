@@ -34,7 +34,10 @@ for y_coord in range(TARGET_HEIGHT):
     row_of_pixels = []
     for x_coord in range(TARGET_WIDTH):
         r, g, b = downscaled_img.getpixel((x_coord,y_coord))
-        row_of_pixels.append((r, g, b))
+        if (r, g, b) == (0, 0, 0):
+            row_of_pixels.append((12, 12, 12))
+        else:
+            row_of_pixels.append((r, g, b))
     pixel_matrix.append(row_of_pixels)
 
 print(len(pixel_matrix[0]))
