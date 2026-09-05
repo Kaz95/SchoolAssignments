@@ -7,9 +7,8 @@ TODO:
     *...Kinda surprised that works...Not sure what to do next actually. I guess I need to reduce blur on the resulting
         image.
     * Decide on final resolution. 100x100(50 lines) is current front runner.
-    * Test new centering logic in alternate environments....I think it works...
-    * Consider implementing linear interpolation for fade effects. I learned enough to do it, not sure if I'll have time
-    * Look more into overwriting the terminal and manually flushing buffer to avoid overhead/flicker of clearing it.
+    * Basic Linear Interpolated Fade effect implemented. Now I need to reverse it to fade in too.
+    * Centering still working even with fade. A bit more testing and I'll actually trust it not to break.
 """
 import shutil
 from PIL import Image
