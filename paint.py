@@ -82,7 +82,10 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
     for step in range(steps + 1):
         progress = step / steps
         paint_a_frame(matrix, progress, TERMINAL_WIDTH)
-        time.sleep(sleep_rate)
+        if step == 0:
+            time.sleep(3)
+        else:
+            time.sleep(sleep_rate)
 
     sys.stdout.write(SHOW_CURSOR)
     print("\nAnimation Complete.")
