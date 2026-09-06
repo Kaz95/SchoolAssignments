@@ -38,15 +38,17 @@ class Drawing:
     bottom_right = "\u2518"  # ┘
     horiz = "\u2500"  # ─
     vert = "\u2502"  # │
-    half_block = "\u2588"  # █
     circle = '\u2B24'  # ⬤
+    upper_block = '\u2580'  # ▀
+    lower_block = '\u2584'  # ▄
+    full_block = '\u2588'  # █
 
     @classmethod
     def print_character_sprite(cls, word: str) -> None:
         """Draw character sprite base on given sprite data."""
 
         # Need to double up to maintain square aspect ratio
-        full_block = cls.half_block * 2
+        full_block = cls.full_block * 2
         double_space = "  "
 
         sprite_word = []
@@ -65,7 +67,7 @@ class Drawing:
     @classmethod
     def draw_window(cls) -> None:
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        for _ in range(15):
+        for _ in range(18):
 
             if _ == 0:
                 subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
@@ -74,16 +76,16 @@ class Drawing:
             elif _ == 1:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
-            elif _ == 5:
+            elif _ == 6:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
-            elif _ == 9:
+            elif _ == 11:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
-            elif _ == 13:
+            elif _ == 16:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
-            elif _ == 14:
+            elif _ == 17:
                 print(cls.vert + ' ' * 78 + cls.vert)
             else:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
