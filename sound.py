@@ -1,4 +1,5 @@
 import io
+import urllib.request
 import wave
 import winsound
 
@@ -35,6 +36,10 @@ def load_raw_audio_bytes(file_path):
         loaded_bytes = raw_file.read()
         return loaded_bytes
 
+def load_remote_raw_audio_bytes(url):
+    with urllib.request.urlopen('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes.raw') as response:
+        raw_audio_bytes = response.read()
+        return raw_audio_bytes
 
 
 def play(loaded_bytes):
