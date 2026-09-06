@@ -1,8 +1,8 @@
 """A tip calculator program.
 
 TODO:
-    * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
-        the logo bitmap, is probably the move.
+    * Audio was also easier than I expected. I need to trim the file probably, as it blocks program execution. Needs
+        to be snappy.
     * Review and refactor.
 
 
@@ -13,6 +13,8 @@ import json
 import sys
 import time
 import urllib.request
+
+import sound
 
 PANERA_LOGO_BITMAP_REMOTE = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
 TERMINAL_WIDTH = 80
@@ -227,7 +229,7 @@ class TipCalc:
     TIP_OPTIONS = {'a': .15,
                    'b': .2,
                    'c': .25}
-
+    AUDIO = None
     @classmethod
     def get_bill(cls) -> None:
         user_input = Drawing.draw_window()
@@ -256,6 +258,7 @@ class TipCalc:
         if cls.OPTION.lower() == 'r':
             cls.BILL = 0
             cls.TIP = 0
+            sound.play(cls.AUDIO)
 
         elif cls.OPTION.lower() == 't':
             cls.TIP = 0
@@ -342,6 +345,8 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
 
 
 if __name__ == '__main__':
+    raw_audio = sound.load_remote_raw_audio_bytes('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes.raw')
+    TipCalc.AUDIO = raw_audio
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
     play_animation_sequence(logo_bitmap, 60, .05)
 
