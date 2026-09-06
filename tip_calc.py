@@ -210,11 +210,71 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     bread = '1F35E'
     flat_bread = '1FAD3'
 
+class TipCalc:
+    BILL = 0
+    TIP = 0
+    OPTION = None
+    EXIT = False
+
+    @classmethod
+    def get_bill(cls):
+        cls.BILL = Drawing.draw_window()
+
+    @classmethod
+    def get_tip(cls):
+        cls.TIP = Drawing.draw_window(bill=cls.BILL)
+
+    @classmethod
+    def get_option(cls):
+        cls.OPTION = Drawing.draw_window(bill=cls.BILL, tip=cls.TIP)
+
+        if cls.OPTION.lower() == 'r':
+            cls.BILL = 0
+            cls.TIP = 0
+
+        elif cls.OPTION.lower() == 't':
+            cls.TIP = 0
+
+        elif cls.OPTION.lower() == 'e':
+            cls.EXIT = True
+
+
+
+    @classmethod
+    def to_float(cls, value):
+        return f'{int(value):04.2f}'
 
 if __name__ == '__main__':
-    bill = Drawing.draw_window()
-    bill = f'{int(bill):04.2f}'
-    tip = Drawing.draw_window(bill=bill)
-    tip = f'{int(tip):04.2f}'
-    Drawing.draw_window(bill, tip)
+    TipCalc.get_bill()
+    TipCalc.get_tip()
+    TipCalc.get_option()
+    while not TipCalc.EXIT:
+        if not TipCalc.BILL:
+            TipCalc.get_bill()
+
+        elif not TipCalc.TIP:
+            TipCalc.get_tip()
+
+        else:
+            TipCalc.get_option()
+
+        # if TipCalc.OPTION:
+        #     if TipCalc.OPTION.lower() == 'r':
+        #         TipCalc.BILL = 0
+        #         TipCalc.TIP = 0
+        #         TipCalc.
+        #
+        # elif TipCalc.OPTION.lower() == 't':
+        #     pass
+        # elif TipCalc.OPTION.lower() == 'e':
+        #     pass
+        # else:
+        # print('Invalid option.')
+    # _bill = Drawing.draw_window()
+    # _bill = f'{int(_bill):04.2f}'
+    # _tip = Drawing.draw_window(_bill)
+    # _tip = f'{int(_tip):04.2f}'
+    # _option = Drawing.draw_window(_bill, _tip)
+
+
     # Drawing.draw_word('$123')
