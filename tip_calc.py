@@ -79,7 +79,7 @@ class Drawing:
         return (row >> (3 - x)) & 1
 
     @classmethod
-    def draw_word(cls, word: str, pad: str='') -> None:
+    def draw_word(cls, word: str, pad: str = '') -> None:
         """Draw a character sprite using Unicode block characters."""
         sprites = [CHARACTER_SPRITES[c] + [0] for c in word]
         for y in range(0, len(sprites[0]), 2):
@@ -107,9 +107,8 @@ class Drawing:
 
             print(cls.RESET)
 
-
     @classmethod
-    def draw_window(cls, bill: str | int=0, tip: str | int=0) -> str:
+    def draw_window(cls, bill: str | int = 0, tip: str | int = 0) -> str:
         """Draw full calculator UI, including dynamic values."""
         print(cls.PANERA_TAN, end='')
         print(cls.CLEAR_SCREEN)
@@ -118,13 +117,10 @@ class Drawing:
         bill = float(bill)
         tip = float(tip)
 
-
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        # subject = f'{EmojiUnicodes.bread} Welcome to the Panera Bread Tip Calculator! {EmojiUnicodes.bread}'
-        # print(subject.center(80))
         print('Welcome to:'.center(80))
         print()
-        Drawing.draw_word('PANERA BREAD', pad= ' ' * 18)
+        Drawing.draw_word('PANERA BREAD', pad=' ' * 18)
         print(cls.PANERA_TAN, end='')
         print(cls.vert + cls.horiz * 78 + cls.vert)
         for _ in range(15):
@@ -136,19 +132,22 @@ class Drawing:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 3:
-                print(cls.vert + f'A.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'A.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(
+                    39) + cls.vert)
 
             elif _ == 5:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 7:
-                print(cls.vert + f'B.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'B.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(
+                    39) + cls.vert)
 
             elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 11:
-                print(cls.vert + f'C.) 25%:  ${bill * .25:04.2f}'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'C.) 25%:  ${bill * .25:04.2f}'.center(
+                    38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
             elif _ == 13:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
@@ -161,10 +160,13 @@ class Drawing:
                     print(cls.vert + '[R]eset, [T]ip, [E]xit...'.center(78) + cls.vert)
             else:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
+
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
+
         uinput = input('? ')
         print(cls.RESET)
         return uinput
+
 
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
@@ -214,6 +216,7 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     bread = '1F35E'
     flat_bread = '1FAD3'
 
+
 class TipCalc:
     """Core business logic. Gather user input based on context and draw UI."""
     BILL = 0
@@ -225,7 +228,6 @@ class TipCalc:
                    'b': .2,
                    'c': .25}
 
-
     @classmethod
     def get_bill(cls) -> None:
         user_input = Drawing.draw_window()
@@ -234,7 +236,6 @@ class TipCalc:
             cls.BILL = user_input
         except ValueError:
             pass
-
 
     @classmethod
     def get_tip(cls) -> None:
@@ -266,8 +267,10 @@ class TipCalc:
     def to_float(cls, value) -> str:
         return f'{int(value):04.2f}'
 
+
 # From other modules
 TERMINAL_BLACK = (12, 12, 12)
+
 
 def load_bitmap(remote_bitmap):
     with urllib.request.urlopen(remote_bitmap) as response:
@@ -282,8 +285,8 @@ def lerp(starting_color, target_color, progress):
 
     return r, g, b
 
-def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
+def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
     # Overwrite the previous frame by pinning cursor back to the top left corner
     sys.stdout.write(Drawing.CURSOR_TO_TOP)
 
@@ -315,8 +318,6 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
         sys.stdout.write("".join(line_buffer) + Drawing.RESET + "\n")
     sys.stdout.flush()
-
-
 
 
 def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
