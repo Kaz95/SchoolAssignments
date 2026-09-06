@@ -81,7 +81,7 @@ class Drawing:
         return (row >> (3 - x)) & 1
 
     @classmethod
-    def draw_word(cls, word, pad=''):
+    def draw_word(cls, word: str, pad: str='') -> None:
         """Draw a character sprite using Unicode block characters."""
         sprites = [CHARACTER_SPRITES[c] + [0] for c in word]
         for y in range(0, len(sprites[0]), 2):
@@ -111,7 +111,7 @@ class Drawing:
 
 
     @classmethod
-    def draw_window(cls, bill=0, tip=0):
+    def draw_window(cls, bill: str | int=0, tip: str | int=0) -> str:
         """Draw full calculator UI, including dynamic values."""
         print(cls.PANERA_TAN, end='')
         print(cls.CLEAR_SCREEN)
@@ -224,15 +224,15 @@ class TipCalc:
     EXIT = False
 
     @classmethod
-    def get_bill(cls):
+    def get_bill(cls) -> None:
         cls.BILL = Drawing.draw_window()
 
     @classmethod
-    def get_tip(cls):
+    def get_tip(cls) -> None:
         cls.TIP = Drawing.draw_window(bill=cls.BILL)
 
     @classmethod
-    def get_option(cls):
+    def get_option(cls) -> None:
         cls.OPTION = Drawing.draw_window(bill=cls.BILL, tip=cls.TIP)
 
         if cls.OPTION.lower() == 'r':
@@ -246,7 +246,7 @@ class TipCalc:
             cls.EXIT = True
 
     @classmethod
-    def to_float(cls, value):
+    def to_float(cls, value) -> str:
         return f'{int(value):04.2f}'
 
 if __name__ == '__main__':
