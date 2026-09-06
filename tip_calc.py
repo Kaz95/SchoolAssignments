@@ -60,6 +60,8 @@ class Drawing:
     full_block = '\u2588'  # █
     WHITE = "\033[97m"
     RESET = "\033[0m"
+    CURSOR_TO_TOP = "\x1b[H"
+    CLEAR_SCREEN = "\x1b[2J"
 
     @staticmethod
     def get_pixel(row: int, x: int) -> int:
@@ -96,9 +98,12 @@ class Drawing:
 
     @classmethod
     def draw_window(cls, bill=0, tip=0):
+        print(cls.CLEAR_SCREEN)
+        print(cls.CURSOR_TO_TOP)
 
         bill = float(bill)
         tip = float(tip)
+
 
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
         subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
@@ -113,13 +118,13 @@ class Drawing:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 3:
-                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + f'Base: ${bill}'.center(39) + cls.vert)
+                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
 
             elif _ == 5:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 7:
-                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + f'Tip: ${tip}'.center(39) + cls.vert)
+                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
 
             elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
@@ -134,6 +139,8 @@ class Drawing:
                     print(cls.vert + 'Enter Bill:'.center(78) + cls.vert)
                 elif not tip:
                     print(cls.vert + 'Enter Tip:'.center(78) + cls.vert)
+                else:
+                    print(cls.vert + '[R]eset, [T]ip, [E]xit...'.center(78) + cls.vert)
             else:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
