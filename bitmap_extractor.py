@@ -18,42 +18,47 @@ from PIL import Image
 from paint import play_animation_sequence, paint
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
-
+panera_logo_bitmap_remote = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
 TARGET_HEIGHT = 100
 TARGET_WIDTH = 100
 
-img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
-img  = img.convert('RGB')
-width, height = img.size
 
-print(width)
-print(height)
+def extract_bitmap():
+    img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
+    img = img.convert('RGB')
+    width, height = img.size
 
-downscaled_img = img.resize((TARGET_WIDTH, TARGET_HEIGHT), Image.Resampling.LANCZOS)
+    print(width)
+    print(height)
 
-print(f'{downscaled_img.width}, {downscaled_img.height}')
-pixel_matrix = []
-for y_coord in range(TARGET_HEIGHT):
-    row_of_pixels = []
-    for x_coord in range(TARGET_WIDTH):
-        r, g, b = downscaled_img.getpixel((x_coord,y_coord))
-        if (r, g, b) == (0, 0, 0):
-            row_of_pixels.append((12, 12, 12))
-        else:
-            row_of_pixels.append((r, g, b))
-    pixel_matrix.append(row_of_pixels)
+    downscaled_img = img.resize((TARGET_WIDTH, TARGET_HEIGHT), Image.Resampling.LANCZOS)
 
-print(len(pixel_matrix[0]))
+    print(f'{downscaled_img.width}, {downscaled_img.height}')
+    pixel_matrix = []
+    for y_coord in range(TARGET_HEIGHT):
+        row_of_pixels = []
+        for x_coord in range(TARGET_WIDTH):
+            r, g, b = downscaled_img.getpixel((x_coord, y_coord))
+            if (r, g, b) == (0, 0, 0):
+                row_of_pixels.append((12, 12, 12))
+            else:
+                row_of_pixels.append((r, g, b))
+        pixel_matrix.append(row_of_pixels)
+
+    return pixel_matrix
 
 
-# with open("panera_logo_bitmap.json", "w", encoding="utf-8") as file:
-#     json.dump(pixel_matrix, file, indent=4)
+def dump_pixel_matrix(bitmap):
+    with open("panera_logo_bitmap.json", "w", encoding="utf-8") as file:
+        json.dump(bitmap, file, indent=4)
 
-panera_logo_bitmap_remote = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
 
-with urllib.request.urlopen(panera_logo_bitmap_remote) as response:
-    panera_logo_bitmap = json.load(response)
+def load_bitmap():
+    with urllib.request.urlopen(panera_logo_bitmap_remote) as response:
+        panera_logo_bitmap = json.load(response)
+        return panera_logo_bitmap
+
+
+if __name__ == '__main__':
+    panera_logo_bitmap = load_bitmap()
     play_animation_sequence(panera_logo_bitmap)
-
-# paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
-# play_animation_sequence(pixel_matrix, 60, 0.05)
