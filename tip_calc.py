@@ -92,27 +92,6 @@ class Drawing:
             print(cls.RESET)
 
 
-    # @classmethod
-    # def print_character_sprite(cls, word: str) -> None:
-    #     """Draw character sprite base on given sprite data."""
-    #
-    #     # Need to double up to maintain square aspect ratio
-    #     full_block = cls.full_block * 2
-    #     double_space = "  "
-    #
-    #     sprite_word = []
-    #     for char in word:
-    #         sprite_word.append(CHARACTER_SPRITES[char])
-    #
-    #     for _ in range(5):
-    #         row_string = ''
-    #         for char in sprite_word:
-    #             row = f'{char[_]:05b}'
-    #             graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
-    #             row_string += graphic_row
-    #         row_string = row_string.center(TERMINAL_WIDTH)
-    #         Drawing.draw_ticker_row(row_string, emoji=True)
-
     @classmethod
     def draw_window(cls) -> None:
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
