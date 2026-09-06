@@ -4,7 +4,6 @@ TODO:
     * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
         the logo bitmap, is probably the move.
     * Review and refactor.
-    * Sanitize inputs.
     * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
     * Allow tip option number to be used in place of a value.
     * Calc tax
@@ -154,7 +153,7 @@ class Drawing:
 
             elif _ == 14:
                 if not bill:
-                    print(cls.vert + 'Enter Bill:'.center(78) + cls.vert)
+                    print(cls.vert + 'Enter Bill: $$$ or $$.$$'.center(78) + cls.vert)
                 elif not tip:
                     print(cls.vert + 'Enter Tip:'.center(78) + cls.vert)
                 else:
@@ -223,11 +222,22 @@ class TipCalc:
 
     @classmethod
     def get_bill(cls) -> None:
-        cls.BILL = Drawing.draw_window()
+        user_input = Drawing.draw_window()
+        try:
+            float(user_input)
+            cls.BILL = user_input
+        except ValueError:
+            pass
+
 
     @classmethod
     def get_tip(cls) -> None:
-        cls.TIP = Drawing.draw_window(bill=cls.BILL)
+        user_input = Drawing.draw_window(bill=cls.BILL)
+        try:
+            float(user_input)
+            cls.TIP = user_input
+        except ValueError:
+            pass
 
     @classmethod
     def get_option(cls) -> None:
@@ -250,9 +260,9 @@ class TipCalc:
 if __name__ == '__main__':
     logo_bitmap = bitmap_extractor.load_bitmap(bitmap_extractor.panera_logo_bitmap_remote)
     paint.play_animation_sequence(logo_bitmap, 60, .05)
-    TipCalc.get_bill()
-    TipCalc.get_tip()
-    TipCalc.get_option()
+    # TipCalc.get_bill()
+    # TipCalc.get_tip()
+    # TipCalc.get_option()
     while not TipCalc.EXIT:
         if not TipCalc.BILL:
             TipCalc.get_bill()
