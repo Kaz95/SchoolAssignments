@@ -22,6 +22,7 @@ import bitmap_extractor
 import paint
 
 TERMINAL_WIDTH = 80
+"""Hardcoded terminal width in characters."""
 
 CHARACTER_SPRITES = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
                      't': [0x4, 0xE, 0x4, 0x4, 0x4],
@@ -51,6 +52,7 @@ CHARACTER_SPRITES = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
                      '9': [0x0, 0xE, 0xA, 0xE, 0x2, 0xE, 0x0],
                      '$': [0x4, 0xE, 0x8, 0xE, 0x2, 0xE, 0x4]
                      }
+"""Sprite data represented in hexadecimal nibbles."""
 
 
 class Drawing:
@@ -72,10 +74,15 @@ class Drawing:
 
     @staticmethod
     def get_pixel(row: int, x: int) -> int:
+        """Retrieve a given 'pixel' at index x from 4 bit number.
+
+        The pixel is represented by either a 1 or a 0.
+        """
         return (row >> (3 - x)) & 1
 
     @classmethod
     def draw_word(cls, word, pad=''):
+        """Draw a character sprite using Unicode block characters."""
         sprites = [CHARACTER_SPRITES[c] + [0] for c in word]
         for y in range(0, len(sprites[0]), 2):
             line = [pad]
@@ -105,6 +112,7 @@ class Drawing:
 
     @classmethod
     def draw_window(cls, bill=0, tip=0):
+        """Draw full calculator UI, including dynamic values."""
         print(cls.CLEAR_SCREEN)
         print(cls.CURSOR_TO_TOP)
 
