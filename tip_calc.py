@@ -3,7 +3,6 @@
 TODO:
     * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
         the logo bitmap, is probably the move.
-    * Add color to subject and table.
     * Review and refactor.
     * Add docstrings
     * Add typehints.
@@ -67,6 +66,8 @@ class Drawing:
     lower_block = '\u2584'  # ▄
     full_block = '\u2588'  # █
     WHITE = "\033[97m"
+    PANERA_GREEN = "\x1b[38;2;96;113;0m"
+    PANERA_TAN = "\x1b[38;2;255;214;124m"
     RESET = "\033[0m"
     CURSOR_TO_TOP = "\x1b[H"
     CLEAR_SCREEN = "\x1b[2J"
@@ -112,6 +113,7 @@ class Drawing:
     @classmethod
     def draw_window(cls, bill=0, tip=0):
         """Draw full calculator UI, including dynamic values."""
+        print(cls.PANERA_TAN, end='')
         print(cls.CLEAR_SCREEN)
         print(cls.CURSOR_TO_TOP)
 
@@ -125,6 +127,7 @@ class Drawing:
         print('Welcome to:'.center(80))
         print()
         Drawing.draw_word('PANERA BREAD', pad= ' ' * 18)
+        print(cls.PANERA_TAN, end='')
         print(cls.vert + cls.horiz * 78 + cls.vert)
         for _ in range(15):
 
@@ -162,6 +165,7 @@ class Drawing:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
         uinput = input('? ')
+        print(cls.RESET)
         return uinput
 
 
