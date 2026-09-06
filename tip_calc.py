@@ -95,7 +95,11 @@ class Drawing:
 
 
     @classmethod
-    def draw_window(cls) -> None:
+    def draw_window(cls, bill=0, tip=0):
+
+        bill = float(bill)
+        tip = float(tip)
+
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
         subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
         print(subject.center(80))
@@ -109,28 +113,32 @@ class Drawing:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 3:
-                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + 'Base: $100.00'.center(39) + cls.vert)
+                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + f'Base: ${bill}'.center(39) + cls.vert)
 
             elif _ == 5:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 7:
-                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + 'Tip: $20.00'.center(39) + cls.vert)
+                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + f'Tip: ${tip}'.center(39) + cls.vert)
 
             elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 11:
-                print(cls.vert + '3.) 25%:  $25.00'.center(38) + cls.vert + 'Total: $120.00'.center(39) + cls.vert)
+                print(cls.vert + '3.) 25%:  $25.00'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
             elif _ == 13:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 14:
-                print(cls.vert + 'Enter Bill:'.center(78) + cls.vert)
+                if not bill:
+                    print(cls.vert + 'Enter Bill:'.center(78) + cls.vert)
+                elif not tip:
+                    print(cls.vert + 'Enter Tip:'.center(78) + cls.vert)
             else:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
-        input('? ')
+        uinput = input('? ')
+        return uinput
 
 
 class ColorEscapeSequences:
@@ -197,5 +205,9 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
 
 
 if __name__ == '__main__':
-    Drawing.draw_window()
+    bill = Drawing.draw_window()
+    bill = f'{int(bill):04.2f}'
+    tip = Drawing.draw_window(bill=bill)
+    tip = f'{int(tip):04.2f}'
+    Drawing.draw_window(bill, tip)
     # Drawing.draw_word('$123')
