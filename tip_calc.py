@@ -5,7 +5,7 @@ TODO:
         the logo bitmap, is probably the move.
     * Review and refactor.
     * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
-    * Allow tip option number to be used in place of a value.
+    *
     * Calc tax
     * Allow change in preset tip %?
 
@@ -73,6 +73,8 @@ class Drawing:
     RESET = "\033[0m"
     CURSOR_TO_TOP = "\x1b[H"
     CLEAR_SCREEN = "\x1b[2J"
+    HIDE_CURSOR = "\x1b[?25l"
+    SHOW_CURSOR = "\x1b[?25h"
 
     @staticmethod
     def get_pixel(row: int, x: int) -> int:
@@ -140,27 +142,27 @@ class Drawing:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 3:
-                print(cls.vert + f'1.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'A.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
 
             elif _ == 5:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 7:
-                print(cls.vert + f'2.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'B.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
 
             elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 11:
-                print(cls.vert + f'3.) 25%:  ${bill * .25:04.2f}'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'C.) 25%:  ${bill * .25:04.2f}'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
             elif _ == 13:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 14:
                 if not bill:
-                    print(cls.vert + 'Enter Bill: $$$ or $$.$$'.center(78) + cls.vert)
+                    print(cls.vert + 'Enter Bill: $$ or $$.$$'.center(78) + cls.vert)
                 elif not tip:
-                    print(cls.vert + 'Enter Tip:'.center(78) + cls.vert)
+                    print(cls.vert + 'Enter Tip: $$ or $$.$$'.center(78) + cls.vert)
                 else:
                     print(cls.vert + '[R]eset, [T]ip, [E]xit...'.center(78) + cls.vert)
             else:
@@ -225,6 +227,11 @@ class TipCalc:
     OPTION = None
     EXIT = False
 
+    TIP_OPTIONS = {'a': .15,
+                   'b': .2,
+                   'c': .25}
+
+
     @classmethod
     def get_bill(cls) -> None:
         user_input = Drawing.draw_window()
@@ -238,11 +245,14 @@ class TipCalc:
     @classmethod
     def get_tip(cls) -> None:
         user_input = Drawing.draw_window(bill=cls.BILL)
-        try:
-            float(user_input)
-            cls.TIP = user_input
-        except ValueError:
-            pass
+        if user_input.lower() in cls.TIP_OPTIONS.keys():
+            cls.TIP = float(cls.BILL) * cls.TIP_OPTIONS[user_input]
+        else:
+            try:
+                float(user_input)
+                cls.TIP = user_input
+            except ValueError:
+                pass
 
     @classmethod
     def get_option(cls) -> None:
@@ -264,16 +274,6 @@ class TipCalc:
 
 # From other modules
 TERMINAL_BLACK = (12, 12, 12)
-PIXEL = '\u2584'
-
-# TODO: Figure out what I want to do about redundant global vars. Probably need to reuse them, but I'm lazy.
-# ANSI escapes
-RESET = "\x1b[0m"
-CURSOR_TO_TOP = "\x1b[H"  # Moves text cursor to 0,0 without clearing screen
-CLEAR_SCREEN = "\x1b[2J"  # Completely clears the terminal buffer once
-HIDE_CURSOR = "\x1b[?25l"  # Hides flashing text terminal bar
-SHOW_CURSOR = "\x1b[?25h"  # Restores terminal cursor state
-
 
 def load_bitmap(remote_bitmap):
     with urllib.request.urlopen(remote_bitmap) as response:
@@ -291,7 +291,7 @@ def lerp(starting_color, target_color, progress):
 def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
     # Overwrite the previous frame by pinning cursor back to the top left corner
-    sys.stdout.write(CURSOR_TO_TOP)
+    sys.stdout.write(Drawing.CURSOR_TO_TOP)
 
     height = len(bit_map)
     width = len(bit_map[0])
@@ -317,9 +317,9 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
             bg_ansi = f"\x1b[48;2;{top_rgb[0]};{top_rgb[1]};{top_rgb[2]}m"
             fg_ansi = f"\x1b[38;2;{bot_rgb[0]};{bot_rgb[1]};{bot_rgb[2]}m"
 
-            line_buffer.append(f"{bg_ansi}{fg_ansi}{PIXEL}")
+            line_buffer.append(f"{bg_ansi}{fg_ansi}{Drawing.lower_block}")
 
-        sys.stdout.write("".join(line_buffer) + RESET + "\n")
+        sys.stdout.write("".join(line_buffer) + Drawing.RESET + "\n")
     sys.stdout.flush()
 
 
@@ -327,8 +327,8 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
 def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
     # Hide interface cursors
-    sys.stdout.write(HIDE_CURSOR)
-    sys.stdout.write(CLEAR_SCREEN)
+    sys.stdout.write(Drawing.HIDE_CURSOR)
+    sys.stdout.write(Drawing.CLEAR_SCREEN)
 
     for step in range(steps + 1):
         progress = step / steps
@@ -343,16 +343,13 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
         else:
             time.sleep(sleep_rate)
 
-    sys.stdout.write(SHOW_CURSOR)
-    print("\nAnimation Complete.")
+    sys.stdout.write(Drawing.SHOW_CURSOR)
 
 
 if __name__ == '__main__':
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
     play_animation_sequence(logo_bitmap, 60, .05)
-    # TipCalc.get_bill()
-    # TipCalc.get_tip()
-    # TipCalc.get_option()
+
     while not TipCalc.EXIT:
         if not TipCalc.BILL:
             TipCalc.get_bill()
@@ -362,24 +359,3 @@ if __name__ == '__main__':
 
         else:
             TipCalc.get_option()
-
-        # if TipCalc.OPTION:
-        #     if TipCalc.OPTION.lower() == 'r':
-        #         TipCalc.BILL = 0
-        #         TipCalc.TIP = 0
-        #         TipCalc.
-        #
-        # elif TipCalc.OPTION.lower() == 't':
-        #     pass
-        # elif TipCalc.OPTION.lower() == 'e':
-        #     pass
-        # else:
-        # print('Invalid option.')
-    # _bill = Drawing.draw_window()
-    # _bill = f'{int(_bill):04.2f}'
-    # _tip = Drawing.draw_window(_bill)
-    # _tip = f'{int(_tip):04.2f}'
-    # _option = Drawing.draw_window(_bill, _tip)
-
-
-    # Drawing.draw_word('$123')
