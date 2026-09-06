@@ -117,8 +117,11 @@ class Drawing:
 
 
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
-        print(subject.center(80))
+        # subject = f'{EmojiUnicodes.bread} Welcome to the Panera Bread Tip Calculator! {EmojiUnicodes.bread}'
+        # print(subject.center(80))
+        print('Welcome to:'.center(80))
+        print()
+        Drawing.draw_word('PANERA BREAD', pad= ' ' * 18)
         print(cls.vert + cls.horiz * 78 + cls.vert)
         for _ in range(15):
 
