@@ -1,13 +1,14 @@
 """A tip calculator program.
 
 TODO:
-    * Decided to keep UI basic and usable. Will leave more time to play with graphics.
+    * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
+    * Decide final project layout. Am I hardcoding bitmap or copying my extractor code into this module?
+    * Allow tip option number to be used in place of a value.
     * Calc tax
     * Allow change in preset tip %?
     * Decide if I want to use any character sprites and if so, where. I'm thinking at least total. Maybe use it for
         table subject? Or table headers?
-    * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
-    * Decide final project layout. Am I hardcoding bitmap or copying my extractor code into this module?
+
 
 
 """
