@@ -4,8 +4,7 @@ TODO:
     * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
         the logo bitmap, is probably the move.
     * Review and refactor.
-    * Calc tax
-    * Allow change in preset tip %?
+
 
 
 
