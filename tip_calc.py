@@ -4,8 +4,6 @@ TODO:
     * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
         the logo bitmap, is probably the move.
     * Review and refactor.
-    * Add docstrings
-    * Add typehints.
     * Sanitize inputs.
     * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
     * Allow tip option number to be used in place of a value.
