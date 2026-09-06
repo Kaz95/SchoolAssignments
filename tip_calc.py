@@ -116,67 +116,40 @@ class Drawing:
     @classmethod
     def draw_window(cls) -> None:
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        for _ in range(18):
+        subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
+        print(subject.center(80))
+        print(cls.vert + cls.horiz * 78 + cls.vert)
+        for _ in range(15):
 
             if _ == 0:
-                subject = f'{EmojiUnicodes.computer} Subject {EmojiUnicodes.computer}'
-                print(subject.center(80))
+                print(cls.vert + 'Gratuities'.center(38) + cls.vert + 'Bill'.center(39) + cls.vert)
 
             elif _ == 1:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
-            elif _ == 6:
+            elif _ == 3:
+                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + 'Base: $100.00'.center(39) + cls.vert)
+
+            elif _ == 5:
+                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
+
+            elif _ == 7:
+                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + 'Tip: $20.00'.center(39) + cls.vert)
+
+            elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 11:
-                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
-
-            elif _ == 16:
+                print(cls.vert + '3.) 25%:  $25.00'.center(38) + cls.vert + 'Total: $120.00'.center(39) + cls.vert)
+            elif _ == 13:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
-            elif _ == 17:
-                print(cls.vert + ' ' * 78 + cls.vert)
+            elif _ == 14:
+                print(cls.vert + 'Enter Bill:'.center(78) + cls.vert)
             else:
                 print(cls.vert + cls.vert.center(78) + cls.vert)
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
         input('? ')
-
-        # TODO: Will need completely rework this method. Should draw the tip calc.
-        pass
-        # """Draw a 'window' with boarder Unicode characters."""
-        # ootext = False
-        # print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        # for _ in range(22):
-        #     if _ == 0:
-        #         subject = f'{entry.emoji} {entry.subject} {entry.emoji}'
-        #         print(subject.center(80))
-        #         continue
-        #     elif _ == 1:
-        #         print(cls.vert + cls.horiz * 78 + cls.vert)
-        #         continue
-        #     elif _ == 20:
-        #         print(cls.vert + cls.horiz * 78 + cls.vert)
-        #         continue
-        #     elif _ == 21:
-        #         print('[B]ack'.center(38) + cls.vert + '[N]ext'.center(38))
-        #     elif ootext:
-        #         print(cls.vert + ' ' * 78 + cls.vert)
-        #     else:
-        #         try:
-        #             print(cls.vert + f'{entry.contents[_ - 2]}' + cls.vert)
-        #         except IndexError:
-        #             ootext = True
-        #
-        # print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
-
-    @classmethod
-    def draw_ticker_row(cls, row_contents: str = ' ' * 80, emoji=None) -> None:
-        """Draw paper tape ticks, with contents centered within."""
-        if not emoji:
-            print(cls.circle, row_contents, cls.circle)
-        else:
-            print(EmojiUnicodes.bread, row_contents, EmojiUnicodes.bread)
-        time.sleep(.75)
 
 
 class ColorEscapeSequences:
