@@ -123,19 +123,19 @@ class Drawing:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
             elif _ == 3:
-                print(cls.vert + '1.) 15%:  $15.00'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'1.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(39) + cls.vert)
 
             elif _ == 5:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 7:
-                print(cls.vert + '2.) 20%:  $20.00'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'2.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(39) + cls.vert)
 
             elif _ == 9:
                 print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
 
             elif _ == 11:
-                print(cls.vert + '3.) 25%:  $25.00'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
+                print(cls.vert + f'3.) 25%:  ${bill * .25:04.2f}'.center(38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
             elif _ == 13:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
