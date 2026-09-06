@@ -11,7 +11,7 @@ TODO:
     * Centering still working even with fade. A bit more testing and I'll actually trust it not to break.
 """
 import shutil, json
-import urllib
+import urllib.request
 from pprint import pprint
 
 from PIL import Image
@@ -49,11 +49,11 @@ print(len(pixel_matrix[0]))
 # with open("panera_logo_bitmap.json", "w", encoding="utf-8") as file:
 #     json.dump(pixel_matrix, file, indent=4)
 
-panera_logo_bitmap = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
+panera_logo_bitmap_remote = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
 
-with urllib.request.urlopen(panera_logo_bitmap) as response:
-    my_remote_list = json.load(response)
-    play_animation_sequence(my_remote_list)
+with urllib.request.urlopen(panera_logo_bitmap_remote) as response:
+    panera_logo_bitmap = json.load(response)
+    play_animation_sequence(panera_logo_bitmap)
 
 # paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
 # play_animation_sequence(pixel_matrix, 60, 0.05)
