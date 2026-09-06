@@ -14,6 +14,9 @@ TODO:
 import sys
 import time
 
+import bitmap_extractor
+import paint
+
 TERMINAL_WIDTH = 80
 
 CHARACTER_SPRITES = {'T': [0xE, 0x4, 0x4, 0x4, 0x4],
@@ -245,6 +248,8 @@ class TipCalc:
         return f'{int(value):04.2f}'
 
 if __name__ == '__main__':
+    logo_bitmap = bitmap_extractor.load_bitmap()
+    paint.play_animation_sequence(logo_bitmap, 60, .05)
     TipCalc.get_bill()
     TipCalc.get_tip()
     TipCalc.get_option()
