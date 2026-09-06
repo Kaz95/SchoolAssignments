@@ -1,6 +1,9 @@
 """A tip calculator program.
 
 TODO:
+    * Review and refactor.
+    * Add docstrings
+    * Add typehints.
     * Sanitize inputs.
     * Start integrating logo. Will have to copy in parts of extractor and paint since I can't do imports.
     * Allow tip option number to be used in place of a value.

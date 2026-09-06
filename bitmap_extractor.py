@@ -4,11 +4,9 @@ Decided to make this a standalone script. I'll probably just include the final b
 hope is to be able to reuse this in the future, similar to the basic font set and drawing class I'm using.
 
 TODO:
-    *...Kinda surprised that works...Not sure what to do next actually. I guess I need to reduce blur on the resulting
-        image.
     * Decide on final resolution. 100x100(50 lines) is current front runner.
-    * Basic Linear Interpolated Fade effect implemented. Now I need to reverse it to fade in too.
-    * Centering still working even with fade. A bit more testing and I'll actually trust it not to break.
+
+
 """
 import shutil, json
 import urllib.request
