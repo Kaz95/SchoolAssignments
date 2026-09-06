@@ -47,7 +47,7 @@ def paint(bit_map, terminal_width,target_height, target_width):
         sys.stdout.write(''.join(line) + '\x1b[0m\n')
 
 
-def paint_a_frame(bit_map, progress, terminal_width):
+def paint_a_frame(bit_map, progress, terminal_width, is_black=True):
 
     # Overwrite the previous frame by pinning cursor back to the top left corner
     sys.stdout.write(CURSOR_TO_TOP)
@@ -62,8 +62,13 @@ def paint_a_frame(bit_map, progress, terminal_width):
             original_top = bit_map[y][x]
             original_bottom = bit_map[y + 1][x]
 
-            top_rgb = lerp(original_top, TERMINAL_BLACK, progress)
-            bot_rgb = lerp(original_bottom, TERMINAL_BLACK, progress)
+            if is_black:
+                top_rgb = lerp(TERMINAL_BLACK, original_top, progress)
+                bot_rgb = lerp(TERMINAL_BLACK, original_bottom, progress)
+
+            else:
+                top_rgb = lerp(original_top, TERMINAL_BLACK, progress)
+                bot_rgb = lerp(original_bottom, TERMINAL_BLACK, progress)
 
             bg_ansi = f"\x1b[48;2;{top_rgb[0]};{top_rgb[1]};{top_rgb[2]}m"
             fg_ansi = f"\x1b[38;2;{bot_rgb[0]};{bot_rgb[1]};{bot_rgb[2]}m"
@@ -82,6 +87,11 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
     for step in range(steps + 1):
         progress = step / steps
         paint_a_frame(matrix, progress, TERMINAL_WIDTH)
+        time.sleep(sleep_rate)
+
+    for step in range(steps + 1):
+        progress = step / steps
+        paint_a_frame(matrix, progress, TERMINAL_WIDTH, is_black=False)
         if step == 0:
             time.sleep(3)
         else:
