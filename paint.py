@@ -26,12 +26,15 @@ def lerp(starting_color, target_color, progress):
 
     return r, g, b
 
-def paint(bit_map, terminal_width,target_height, target_width):
-    pad_length = (terminal_width - target_width) // 2
-    padding = ' ' * pad_length
-    print(len(padding))
+def paint(bit_map, terminal_width,target_height, target_width, pad=False):
+    if pad:
+        pad_length = (terminal_width - target_width) // 2
+        pad = ' ' * pad_length
+    else:
+        pad = ''
+
     for y in range(0, target_height, 2):
-        line = [padding]
+        line = [pad]
         for x in range(target_width):
             top = bit_map[y][x]
             bottom = bit_map[y + 1][x]
@@ -47,17 +50,20 @@ def paint(bit_map, terminal_width,target_height, target_width):
         sys.stdout.write(''.join(line) + '\x1b[0m\n')
 
 
-def paint_a_frame(bit_map, progress, terminal_width, is_black=True):
+def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
     # Overwrite the previous frame by pinning cursor back to the top left corner
     sys.stdout.write(CURSOR_TO_TOP)
 
     height = len(bit_map)
     width = len(bit_map[0])
-    pad_length = (terminal_width - width) // 2
-    padding = ' ' * pad_length
+    if pad:
+        pad_length = (terminal_width - width) // 2
+        pad = ' ' * pad_length
+    else:
+        pad = ''
     for y in range(0, height, 2):
-        line_buffer = [padding]
+        line_buffer = [pad]
         for x in range(width):
             original_top = bit_map[y][x]
             original_bottom = bit_map[y + 1][x]
