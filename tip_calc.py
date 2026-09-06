@@ -9,15 +9,11 @@ TODO:
     * Allow tip option number to be used in place of a value.
     * Calc tax
     * Allow change in preset tip %?
-    * Decide if I want to use any character sprites and if so, where. I'm thinking at least total. Maybe use it for
-        table subject? Or table headers?
 
 
 
 """
 import sys
-import time
-
 import bitmap_extractor
 import paint
 
