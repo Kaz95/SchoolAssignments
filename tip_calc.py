@@ -1,6 +1,9 @@
 """A tip calculator program.
 
 TODO:
+    * Experiment with ways to include sounds. Storing wav file as bytes on GitHub and pulling it in via requests, like
+        the logo bitmap, is probably the move.
+    * Add color to subject and table.
     * Review and refactor.
     * Add docstrings
     * Add typehints.
