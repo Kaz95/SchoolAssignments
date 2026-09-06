@@ -1,10 +1,11 @@
 """A tip calculator program.
 
 TODO:
-    * Decided to keep UI basic and usable. Will leave for time to play with graphics. Add functions for adding values
-        to each window. Probably want a function to format data because 6 similar layouts.
+    * Decided to keep UI basic and usable. Will leave for time to play with graphics.
     * Calc tax
     * Allow change in preset tip %?
+    * Decide if I want to use any character sprites and if so, where. I'm thinking at least total. Maybe use it for
+        table subject? Or table headers?
     * Decide final project layout. Am I hardcoding bitmap or copying my extractor code into this module?
 
 
