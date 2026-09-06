@@ -9,6 +9,7 @@ TODO:
 
 
 """
+import sys
 import time
 
 TERMINAL_WIDTH = 80
@@ -55,27 +56,62 @@ class Drawing:
     upper_block = '\u2580'  # ▀
     lower_block = '\u2584'  # ▄
     full_block = '\u2588'  # █
+    WHITE = "\033[97m"
+    RESET = "\033[0m"
+
+    @staticmethod
+    def get_pixel(row: int, x: int) -> int:
+        return (row >> (3 - x)) & 1
 
     @classmethod
-    def print_character_sprite(cls, word: str) -> None:
-        """Draw character sprite base on given sprite data."""
+    def draw_word(cls, word, pad=''):
+        sprites = [CHARACTER_SPRITES[c] + [0] for c in word]
+        for y in range(0, len(sprites[0]), 2):
+            line = [pad]
+            for sprite in sprites:
+                for x in range(4):
 
-        # Need to double up to maintain square aspect ratio
-        full_block = cls.full_block * 2
-        double_space = "  "
+                    top = cls.get_pixel(sprite[y], x)
+                    bottom = cls.get_pixel(sprite[y + 1], x)
 
-        sprite_word = []
-        for char in word:
-            sprite_word.append(CHARACTER_SPRITES[char])
+                    if top and bottom:
+                        line.append(cls.WHITE + cls.full_block)
 
-        for _ in range(5):
-            row_string = ''
-            for char in sprite_word:
-                row = f'{char[_]:05b}'
-                graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
-                row_string += graphic_row
-            row_string = row_string.center(TERMINAL_WIDTH)
-            Drawing.draw_ticker_row(row_string, emoji=True)
+                    elif top:
+                        line.append(cls.WHITE + cls.upper_block)
+
+
+                    elif bottom:
+                        line.append(cls.WHITE + cls.lower_block)
+
+                    else:
+                        line.append(' ')
+
+            sys.stdout.write(''.join(line))
+
+            print(cls.RESET)
+
+
+    # @classmethod
+    # def print_character_sprite(cls, word: str) -> None:
+    #     """Draw character sprite base on given sprite data."""
+    #
+    #     # Need to double up to maintain square aspect ratio
+    #     full_block = cls.full_block * 2
+    #     double_space = "  "
+    #
+    #     sprite_word = []
+    #     for char in word:
+    #         sprite_word.append(CHARACTER_SPRITES[char])
+    #
+    #     for _ in range(5):
+    #         row_string = ''
+    #         for char in sprite_word:
+    #             row = f'{char[_]:05b}'
+    #             graphic_row = ''.join(full_block if char == "1" else double_space for char in row)
+    #             row_string += graphic_row
+    #         row_string = row_string.center(TERMINAL_WIDTH)
+    #         Drawing.draw_ticker_row(row_string, emoji=True)
 
     @classmethod
     def draw_window(cls) -> None:
@@ -208,3 +244,4 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
 
 if __name__ == '__main__':
     Drawing.draw_window()
+    # Drawing.draw_word('$123')
