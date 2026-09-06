@@ -250,7 +250,7 @@ class TipCalc:
         return f'{int(value):04.2f}'
 
 if __name__ == '__main__':
-    logo_bitmap = bitmap_extractor.load_bitmap()
+    logo_bitmap = bitmap_extractor.load_bitmap(bitmap_extractor.panera_logo_bitmap_remote)
     paint.play_animation_sequence(logo_bitmap, 60, .05)
     TipCalc.get_bill()
     TipCalc.get_tip()

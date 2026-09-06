@@ -53,12 +53,12 @@ def dump_pixel_matrix(bitmap):
         json.dump(bitmap, file, indent=4)
 
 
-def load_bitmap():
-    with urllib.request.urlopen(panera_logo_bitmap_remote) as response:
+def load_bitmap(remote_bitmap):
+    with urllib.request.urlopen(remote_bitmap) as response:
         panera_logo_bitmap = json.load(response)
         return panera_logo_bitmap
 
 
 if __name__ == '__main__':
-    panera_logo_bitmap = load_bitmap()
+    panera_logo_bitmap = load_bitmap(panera_logo_bitmap_remote)
     play_animation_sequence(panera_logo_bitmap)
