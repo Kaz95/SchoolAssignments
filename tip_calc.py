@@ -168,21 +168,6 @@ class Drawing:
         print(cls.RESET)
         return uinput
 
-
-class ColorEscapeSequences:
-    """Enumerated ANSI escape sequences.
-
-    I wasn't sure if I wanted to use the actual enum module or not. This type of data is a perfect fit for an enum, but
-    there is no reason to maintain uniqueness and immutability for this small project. I decided an enum would only
-    make access more verbose, with none of the normal benefits.
-    """
-
-    RESET = "\033[0m"
-    WHITE = "\033[37m"  # White
-    GREEN = "\033[32m"  # Green
-    PHOSPHORGREEN = "\033[1;92m"  # Bold, High-Intensity green.
-
-
 # First time actually finding a solid use case for a MetaClass!
 class PadZeroMeta(type):
     """EmojiUnicodes Metaclass."""
@@ -232,6 +217,7 @@ class EmojiUnicodes(metaclass=PadZeroMeta):
     flat_bread = '1FAD3'
 
 class TipCalc:
+    """Core business logic. Gather user input based on context and draw UI."""
     BILL = 0
     TIP = 0
     OPTION = None
@@ -258,8 +244,6 @@ class TipCalc:
 
         elif cls.OPTION.lower() == 'e':
             cls.EXIT = True
-
-
 
     @classmethod
     def to_float(cls, value):
