@@ -10,7 +10,10 @@ TODO:
     * Basic Linear Interpolated Fade effect implemented. Now I need to reverse it to fade in too.
     * Centering still working even with fade. A bit more testing and I'll actually trust it not to break.
 """
-import shutil
+import shutil, json
+import urllib
+from pprint import pprint
+
 from PIL import Image
 from paint import play_animation_sequence, paint
 
@@ -43,7 +46,14 @@ for y_coord in range(TARGET_HEIGHT):
 print(len(pixel_matrix[0]))
 
 
+# with open("panera_logo_bitmap.json", "w", encoding="utf-8") as file:
+#     json.dump(pixel_matrix, file, indent=4)
 
+panera_logo_bitmap = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
+
+with urllib.request.urlopen(panera_logo_bitmap) as response:
+    my_remote_list = json.load(response)
+    play_animation_sequence(my_remote_list)
 
 # paint(pixel_matrix, TERMINAL_WIDTH, TARGET_HEIGHT, TARGET_WIDTH)
-play_animation_sequence(pixel_matrix, 60, 0.05)
+# play_animation_sequence(pixel_matrix, 60, 0.05)
