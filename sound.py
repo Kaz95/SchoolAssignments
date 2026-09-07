@@ -1,4 +1,6 @@
 import io
+import threading
+import time
 import urllib.request
 import wave
 import winsound
@@ -36,13 +38,13 @@ def load_raw_audio_bytes(file_path):
         loaded_bytes = raw_file.read()
         return loaded_bytes
 
-def load_remote_raw_audio_bytes(url):
+def load_remote_raw_audio_bytes():
     with urllib.request.urlopen('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes') as response:
         raw_audio_bytes = response.read()
         return raw_audio_bytes
 
 
-def play(loaded_bytes):
+def play_kaching(loaded_bytes):
     # How have I never used io library before now?!
     bytes_io = io.BytesIO()
     # Set header and load
@@ -56,7 +58,18 @@ def play(loaded_bytes):
     winsound.PlaySound(bytes_io.getvalue(), winsound.SND_MEMORY)
     # print('playback finished.')
 
+def play(audio_bytes):
+    # audio_bytes = load_remote_raw_audio_bytes()
+    play_thread = threading.Thread(target=play_kaching, args=(audio_bytes,))
+    play_thread.daemon = True  # Allows the program to exit even if the audio is still playing
+    play_thread.start()
+
+
 if __name__ == '__main__':
+    audio_bytes = load_remote_raw_audio_bytes()
+
+    play(audio_bytes)
+
     # raw_audio_bytes = extract_audio_bytes(input_wav_path)
     # write_raw_audio_bytes(raw_output_path, raw_audio_bytes)
-    play(load_raw_audio_bytes(raw_output_path))
+    # play(load_raw_audio_bytes(raw_output_path))

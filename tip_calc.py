@@ -2,7 +2,7 @@
 
 TODO:
     * Audio was also easier than I expected. I need to trim the file probably, as it blocks program execution. Needs
-        to be snappy.
+        to be snappy. Audio still too slow, need to use subprocess or something to not block.
     * Review and refactor.
 
 
@@ -345,7 +345,7 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
 
 
 if __name__ == '__main__':
-    raw_audio = sound.load_remote_raw_audio_bytes('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes')
+    raw_audio = sound.load_remote_raw_audio_bytes()
     TipCalc.AUDIO = raw_audio
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
     play_animation_sequence(logo_bitmap, 60, .05)
