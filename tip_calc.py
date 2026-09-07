@@ -238,6 +238,7 @@ class TipCalc:
             cls.BILL = user_input
         except ValueError:
             pass
+        sound.play(cls.AUDIO)
 
     @classmethod
     def get_tip(cls) -> None:
@@ -250,6 +251,7 @@ class TipCalc:
                 cls.TIP = user_input
             except ValueError:
                 pass
+        sound.play(cls.AUDIO)
 
     @classmethod
     def get_option(cls) -> None:
@@ -258,14 +260,13 @@ class TipCalc:
         if cls.OPTION.lower() == 'r':
             cls.BILL = 0
             cls.TIP = 0
-            sound.play(cls.AUDIO)
 
         elif cls.OPTION.lower() == 't':
             cls.TIP = 0
 
         elif cls.OPTION.lower() == 'e':
             cls.EXIT = True
-
+        sound.play(cls.AUDIO)
     @classmethod
     def to_float(cls, value) -> str:
         return f'{int(value):04.2f}'
