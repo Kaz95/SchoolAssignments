@@ -7,7 +7,7 @@ CHANNELS = 2
 SAMPLE_WIDTH = 2
 SAMPLE_RATE = 44100
 
-input_wav_path = r'C:\Users\kazac\Downloads\kaching.wav'
+input_wav_path = r'C:\Users\kazac\Downloads\kaching-short.wav'
 raw_output_path = r'raw_audio_bytes.raw'
 
 def extract_audio_bytes(wav_file):
@@ -17,7 +17,7 @@ def extract_audio_bytes(wav_file):
         sample_rate = wav_file.getframerate()
         num_frames = wav_file.getnframes()
 
-    raw_audio_bytes = wav_file.readframes(num_frames)
+        raw_audio_bytes = wav_file.readframes(num_frames)
 
     print(f'{len(raw_audio_bytes)} raw bytes.')
     print(f'Channels: {channels}      Width: {sample_width} bytes')
@@ -57,4 +57,6 @@ def play(loaded_bytes):
     print('playback finished.')
 
 if __name__ == '__main__':
-    play(load_raw_audio_bytes(raw_output_path))
+    raw_audio_bytes = extract_audio_bytes(input_wav_path)
+    write_raw_audio_bytes(raw_output_path, raw_audio_bytes)
+    # play(load_raw_audio_bytes(raw_output_path))
