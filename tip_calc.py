@@ -1,8 +1,8 @@
 """A tip calculator program.
 
 TODO:
-    * Audio was also easier than I expected. I need to trim the file probably, as it blocks program execution. Needs
-        to be snappy. Audio still too slow, need to use subprocess or something to not block.
+    * Had to use threading to prevent audio block. Built-in sound async wouldn't work with in-memory bytes.
+        Need to clean up solution. Figure out exactly what the API is going to look like and implement.
     * Review and refactor.
 
 
