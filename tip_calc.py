@@ -238,7 +238,6 @@ class TipCalc:
             cls.BILL = user_input
         except ValueError:
             pass
-        sound.play(cls.AUDIO)
 
     @classmethod
     def get_tip(cls) -> None:
@@ -251,7 +250,6 @@ class TipCalc:
                 cls.TIP = user_input
             except ValueError:
                 pass
-        sound.play(cls.AUDIO)
 
     @classmethod
     def get_option(cls) -> None:
@@ -260,13 +258,14 @@ class TipCalc:
         if cls.OPTION.lower() == 'r':
             cls.BILL = 0
             cls.TIP = 0
+            sound.play(cls.AUDIO)
 
         elif cls.OPTION.lower() == 't':
             cls.TIP = 0
 
         elif cls.OPTION.lower() == 'e':
             cls.EXIT = True
-        sound.play(cls.AUDIO)
+
     @classmethod
     def to_float(cls, value) -> str:
         return f'{int(value):04.2f}'
@@ -346,7 +345,7 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
 
 
 if __name__ == '__main__':
-    raw_audio = sound.load_remote_raw_audio_bytes('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes.raw')
+    raw_audio = sound.load_remote_raw_audio_bytes('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes')
     TipCalc.AUDIO = raw_audio
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
     play_animation_sequence(logo_bitmap, 60, .05)

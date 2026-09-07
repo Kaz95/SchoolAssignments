@@ -37,7 +37,7 @@ def load_raw_audio_bytes(file_path):
         return loaded_bytes
 
 def load_remote_raw_audio_bytes(url):
-    with urllib.request.urlopen('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes.raw') as response:
+    with urllib.request.urlopen('https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes') as response:
         raw_audio_bytes = response.read()
         return raw_audio_bytes
 
@@ -52,11 +52,11 @@ def play(loaded_bytes):
         wav_write.setframerate(SAMPLE_RATE)
         wav_write.writeframes(loaded_bytes)
 
-    print('playback started')
+    # print('playback started')
     winsound.PlaySound(bytes_io.getvalue(), winsound.SND_MEMORY)
-    print('playback finished.')
+    # print('playback finished.')
 
 if __name__ == '__main__':
-    raw_audio_bytes = extract_audio_bytes(input_wav_path)
-    write_raw_audio_bytes(raw_output_path, raw_audio_bytes)
-    # play(load_raw_audio_bytes(raw_output_path))
+    # raw_audio_bytes = extract_audio_bytes(input_wav_path)
+    # write_raw_audio_bytes(raw_output_path, raw_audio_bytes)
+    play(load_raw_audio_bytes(raw_output_path))
