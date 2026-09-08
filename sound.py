@@ -59,7 +59,6 @@ def play_kaching(loaded_bytes):
     # print('playback finished.')
 
 def play(audio_bytes):
-    # audio_bytes = load_remote_raw_audio_bytes()
     play_thread = threading.Thread(target=play_kaching, args=(audio_bytes,))
     play_thread.daemon = True  # Allows the program to exit even if the audio is still playing
     play_thread.start()

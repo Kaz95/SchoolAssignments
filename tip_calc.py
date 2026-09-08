@@ -9,12 +9,14 @@ TODO:
 
 
 """
+import io
 import json
 import sys
+import threading
 import time
 import urllib.request
-
-import sound
+import wave
+import winsound
 
 PANERA_LOGO_BITMAP_REMOTE = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
 TERMINAL_WIDTH = 80
@@ -76,7 +78,8 @@ class Drawing:
     def get_pixel(row: int, x: int) -> int:
         """Retrieve a given 'pixel' at index x from 4 bit number.
 
-        The pixel is represented by either a 1 or a 0.
+        The pixel is represented by either a 1 or a 0. I'm shifting the bits until the one I'm interested in is the
+        least significant bit. Then, I use an & mask of 1 to see if that bit is turned on or off.
         """
         return (row >> (3 - x)) & 1
 
@@ -106,7 +109,6 @@ class Drawing:
                         line.append(' ')
 
             sys.stdout.write(''.join(line))
-
             print(cls.RESET)
 
     @classmethod
@@ -230,6 +232,7 @@ class TipCalc:
                    'b': .2,
                    'c': .25}
     AUDIO = None
+
     @classmethod
     def get_bill(cls) -> None:
         user_input = Drawing.draw_window()
@@ -258,7 +261,7 @@ class TipCalc:
         if cls.OPTION.lower() == 'r':
             cls.BILL = 0
             cls.TIP = 0
-            sound.play(cls.AUDIO)
+            play(cls.AUDIO)
 
         elif cls.OPTION.lower() == 't':
             cls.TIP = 0
@@ -271,8 +274,11 @@ class TipCalc:
         return f'{int(value):04.2f}'
 
 
-# From other modules
+# From other modules. I'd normally import, but limited to single file.
 TERMINAL_BLACK = (12, 12, 12)
+CHANNELS = 2
+SAMPLE_WIDTH = 2
+SAMPLE_RATE = 44100
 
 
 def load_bitmap(remote_bitmap):
@@ -290,6 +296,18 @@ def lerp(starting_color, target_color, progress):
 
 
 def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
+    """This function is super inefficient. I realized this as a result of trying to run it in online environments.
+
+    There is a massive amount of data being pushed. I think online tools are I/O bottle knecked on the networking
+    side of things. I also believe most online editors are running inside a docker container at this point, and only
+    allocated a very small amount of resources. I wouldn't be surprised if the containers are also throttled depending on
+    work load. I could attempt to make it more efficient(the nested loop is O(n^2) I think), but the real solution
+    is to run it locally. If I were trying to get it to run online, I'd start by only sending a new ANSI color code
+    when a pixel has a different color from the previous. I think this would significantly reduce the overall payload.
+    I should probably also append the reset and newline escapes to the line buffer list to avoid string concatenation
+    all together. Appending to end of a list is O(1) constant time, while creating a new string in a loop is O(n^2)
+    at its worst.
+    """
     # Overwrite the previous frame by pinning cursor back to the top left corner
     sys.stdout.write(Drawing.CURSOR_TO_TOP)
 
@@ -344,8 +362,34 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
     sys.stdout.write(Drawing.SHOW_CURSOR)
 
 
+def load_remote_raw_audio_bytes():
+    with urllib.request.urlopen(
+            'https://github.com/Kaz95/SchoolAssignments/raw/refs/heads/master/raw_audio_bytes') as response:
+        raw_audio_bytes = response.read()
+        return raw_audio_bytes
+
+
+def play_kaching(loaded_bytes):
+    # How have I never used io library before now?!
+    bytes_io = io.BytesIO()
+    # Set header and load
+    with wave.open(bytes_io, "wb") as wav_write:
+        wav_write.setnchannels(CHANNELS)
+        wav_write.setsampwidth(SAMPLE_WIDTH)
+        wav_write.setframerate(SAMPLE_RATE)
+        wav_write.writeframes(loaded_bytes)
+
+    winsound.PlaySound(bytes_io.getvalue(), winsound.SND_MEMORY)
+
+
+def play(audio_bytes):
+    play_thread = threading.Thread(target=play_kaching, args=(audio_bytes,))
+    play_thread.daemon = True  # Allows the program to exit even if the audio is still playing
+    play_thread.start()
+
+
 if __name__ == '__main__':
-    raw_audio = sound.load_remote_raw_audio_bytes()
+    raw_audio = load_remote_raw_audio_bytes()
     TipCalc.AUDIO = raw_audio
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
     play_animation_sequence(logo_bitmap, 60, .05)

@@ -10,7 +10,6 @@ TODO:
 """
 import shutil, json
 import urllib.request
-from pprint import pprint
 
 from PIL import Image
 from paint import play_animation_sequence, paint
