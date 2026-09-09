@@ -60,3 +60,13 @@ that assembly step automatically is a likely future addition, but not
 something this repo does yet.
 
 ## Known issues
+
+- Animator is too slow.
+   
+  - I'm working on implementing pre-rendered interpolated fade. Separating the frame rendering from the sleep/framerate
+    should help a lot. I might use this as a tool to learn profiling and optimization in Python, since I don't have a 
+    lot of experience with that yet.
+
+  - I'm also looking into doing precomputed color runs during the pre-rendering step. This would fix the issue 
+    of sending a new ANSI color code for every pixel in every frame, which is a lot of overhead. 
+    Instead, I could send a single color code per run of pixels, which would be a lot more efficient. 
