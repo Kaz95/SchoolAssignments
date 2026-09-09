@@ -104,4 +104,3 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
             time.sleep(sleep_rate)
 
     sys.stdout.write(SHOW_CURSOR)
-    print("\nAnimation Complete.")
