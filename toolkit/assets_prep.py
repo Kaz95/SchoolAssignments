@@ -12,7 +12,7 @@ import shutil, json
 import urllib.request
 
 from PIL import Image
-from toolkit.animator import play_animation_sequence
+from animator import play_animation_sequence, precompute_interpolation_frames
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 panera_logo_bitmap_remote = ('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'

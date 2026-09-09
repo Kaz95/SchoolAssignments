@@ -50,11 +50,8 @@ def paint(bit_map, terminal_width,target_height, target_width, pad=False):
         sys.stdout.write(''.join(line) + '\x1b[0m\n')
 
 
-def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
-
-    # Overwrite the previous frame by pinning cursor back to the top left corner
-    sys.stdout.write(CURSOR_TO_TOP)
-
+def render_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
+    """Build one frame as a finished string, without writing anything."""
     height = len(bit_map)
     width = len(bit_map[0])
     if pad:
@@ -62,6 +59,8 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
         pad = ' ' * pad_length
     else:
         pad = ''
+
+    frame_lines = [CURSOR_TO_TOP]
     for y in range(0, height, 2):
         line_buffer = [pad]
         for x in range(width):
@@ -71,7 +70,6 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
             if is_black:
                 top_rgb = lerp(TERMINAL_BLACK, original_top, progress)
                 bot_rgb = lerp(TERMINAL_BLACK, original_bottom, progress)
-
             else:
                 top_rgb = lerp(original_top, TERMINAL_BLACK, progress)
                 bot_rgb = lerp(original_bottom, TERMINAL_BLACK, progress)
@@ -81,27 +79,40 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
             line_buffer.append(f"{bg_ansi}{fg_ansi}{PIXEL}")
 
-        sys.stdout.write("".join(line_buffer) + RESET + "\n")
-    sys.stdout.flush()
+        frame_lines.append("".join(line_buffer) + RESET)
+
+    return "\n".join(frame_lines) + "\n"
+
+
+def precompute_interpolation_frames(bit_map, terminal_width, steps):
+    """Render all frames of the animation in advance and store them in a list."""
+    frames = []
+
+    for step in range(steps + 1):
+        progress = step / steps
+        frames.append(render_frame(bit_map, progress, terminal_width, is_black=True))
+
+    for step in range(steps + 1):
+        progress = step / steps
+        frames.append(render_frame(bit_map, progress, terminal_width, is_black=False))
+
+    return frames
 
 
 def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
-    # Hide interface cursors
+    frames = precompute_interpolation_frames(matrix, TERMINAL_WIDTH, steps)
+    fade_in_frame_count = steps + 1
+
     sys.stdout.write(HIDE_CURSOR)
     sys.stdout.write(CLEAR_SCREEN)
 
-    for step in range(steps + 1):
-        progress = step / steps
-        paint_a_frame(matrix, progress, TERMINAL_WIDTH)
-        time.sleep(sleep_rate)
+    for i, frame in enumerate(frames):
+        sys.stdout.write(frame)
+        sys.stdout.flush()
 
-    for step in range(steps + 1):
-        progress = step / steps
-        paint_a_frame(matrix, progress, TERMINAL_WIDTH, is_black=False)
-        if step == 0:
+        if i == fade_in_frame_count:
             time.sleep(3)
         else:
             time.sleep(sleep_rate)
 
     sys.stdout.write(SHOW_CURSOR)
-    print("\nAnimation Complete.")
