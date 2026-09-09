@@ -344,8 +344,8 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
     sys.stdout.flush()
 
 
-def play_animation_sequence(matrix, steps=40, sleep_rate=0.05):
-    # Hide interface cursors
+def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
+    # Hide interface cursor
     sys.stdout.write(Drawing.HIDE_CURSOR)
     sys.stdout.write(Drawing.CLEAR_SCREEN)
 
@@ -395,7 +395,7 @@ if __name__ == '__main__':
     raw_audio = load_remote_raw_audio_bytes()
     TipCalc.AUDIO = raw_audio
     logo_bitmap = load_bitmap(PANERA_LOGO_BITMAP_REMOTE)
-    play_animation_sequence(logo_bitmap, 60, .05)
+    play_animation_sequence(logo_bitmap, 40, .05)
 
     while not TipCalc.EXIT:
         if not TipCalc.BILL:
