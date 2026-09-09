@@ -344,7 +344,7 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
     sys.stdout.flush()
 
 
-def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
+def play_animation_sequence(matrix, steps=40, sleep_rate=0.05):
     # Hide interface cursors
     sys.stdout.write(Drawing.HIDE_CURSOR)
     sys.stdout.write(Drawing.CLEAR_SCREEN)

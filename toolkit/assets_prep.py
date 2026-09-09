@@ -17,8 +17,8 @@ from toolkit.animator import play_animation_sequence
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
 panera_logo_bitmap_remote = ('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'
                              '/generated/panera_logo_bitmap.json')
-TARGET_HEIGHT = 100
-TARGET_WIDTH = 100
+TARGET_HEIGHT = 80
+TARGET_WIDTH = 80
 
 
 def extract_bitmap():
