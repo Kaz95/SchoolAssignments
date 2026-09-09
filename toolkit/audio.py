@@ -1,6 +1,5 @@
 import io
 import threading
-import time
 import urllib.request
 import wave
 import winsound
@@ -9,8 +8,8 @@ CHANNELS = 2
 SAMPLE_WIDTH = 2
 SAMPLE_RATE = 44100
 
-input_wav_path = r'C:\Users\kazac\Downloads\kaching-short.wav'
-raw_output_path = r'raw_audio_bytes'
+input_wav_path = r'../assets/source_audio/kaching-short.wav'
+raw_output_path = r'../assets/generated/kaching_audio_bytes'
 
 def extract_audio_bytes(wav_file):
     with wave.open(wav_file, 'rb') as wav_file:

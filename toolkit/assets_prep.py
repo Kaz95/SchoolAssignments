@@ -12,16 +12,17 @@ import shutil, json
 import urllib.request
 
 from PIL import Image
-from paint import play_animation_sequence, paint
+from toolkit.animator import play_animation_sequence
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
-panera_logo_bitmap_remote = 'https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master/panera_logo_bitmap.json'
+panera_logo_bitmap_remote = ('https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master'
+                             '/panera_logo_bitmap.json')
 TARGET_HEIGHT = 100
 TARGET_WIDTH = 100
 
 
 def extract_bitmap():
-    img = Image.open(r'C:\Users\kazac\Downloads\Panera-Bread-Logo-cropped-squared.png')
+    img = Image.open(r'../assets/source_images/Panera-Bread-Logo-cropped-squared.png')
     img = img.convert('RGB')
     width, height = img.size
 
@@ -46,7 +47,7 @@ def extract_bitmap():
 
 
 def dump_pixel_matrix(bitmap):
-    with open("panera_logo_bitmap.json", "w", encoding="utf-8") as file:
+    with open("../assets/generated/panera_logo_bitmap.json", "w", encoding="utf-8") as file:
         json.dump(bitmap, file, indent=4)
 
 
