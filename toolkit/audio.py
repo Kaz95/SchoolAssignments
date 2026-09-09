@@ -38,8 +38,8 @@ def load_raw_audio_bytes(file_path):
         return loaded_bytes
 
 def load_remote_raw_audio_bytes():
-    with urllib.request.urlopen('https://github.com/Kaz95/stdlib-only-toolkit/blob/master/assets/generated'
-                                '/kaching_audio_bytes') as response:
+    with urllib.request.urlopen('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'
+                                '/generated/kaching_audio_bytes') as response:
         raw_audio_bytes = response.read()
         return raw_audio_bytes
 

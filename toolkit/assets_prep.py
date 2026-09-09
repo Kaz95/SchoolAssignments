@@ -15,7 +15,8 @@ from PIL import Image
 from toolkit.animator import play_animation_sequence
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
-panera_logo_bitmap_remote = ('https://github.com/Kaz95/stdlib-only-toolkit/blob/master/assets/generated/panera_logo_bitmap.json')
+panera_logo_bitmap_remote = ('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'
+                             '/generated/panera_logo_bitmap.json')
 TARGET_HEIGHT = 100
 TARGET_WIDTH = 100
 

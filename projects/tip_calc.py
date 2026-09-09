@@ -276,7 +276,8 @@ class TipCalc:
 
 
 # From other modules. I'd normally import, but limited to single file.
-PANERA_LOGO_BITMAP_REMOTE = 'https://github.com/Kaz95/stdlib-only-toolkit/blob/master/assets/generated/panera_logo_bitmap.json'
+PANERA_LOGO_BITMAP_REMOTE = ('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'
+                             '/generated/panera_logo_bitmap.json')
 TERMINAL_BLACK = (12, 12, 12)
 CHANNELS = 2
 SAMPLE_WIDTH = 2
@@ -365,8 +366,8 @@ def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
 
 
 def load_remote_raw_audio_bytes():
-    with urllib.request.urlopen('https://github.com/Kaz95/stdlib-only-toolkit/blob/master/assets/generated'
-                                '/kaching_audio_bytes') as response:
+    with urllib.request.urlopen('https://raw.githubusercontent.com/Kaz95/stdlib-only-toolkit/refs/heads/master/assets'
+                                '/generated/kaching_audio_bytes') as response:
         raw_audio_bytes = response.read()
         return raw_audio_bytes
 
