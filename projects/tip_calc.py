@@ -9,6 +9,8 @@ TODO:
 
 
 """
+from __future__ import annotations
+
 import io
 import json
 import sys
@@ -192,7 +194,7 @@ class PadZeroMeta(type):
         emoji = padded_code.encode('utf-8').decode('unicode_escape')
         return emoji
 
-    def __getattribute__(self, name: str, /):
+    def __getattribute__(self, name: str):
         value = super().__getattribute__(name)
 
         # Block dunder methods.
