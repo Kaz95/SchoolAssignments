@@ -4,6 +4,9 @@ A terminal-based tip calculator, written for a class assignment that
 requires the entire submission to be a single .py file using nothing
 outside the Python standard library.
 
+## Demo
+[![Panera Bread Tip Calculator](https://img.youtube.com/vi/mIr1zzVvDFA/0.jpg)](https://www.youtube.com/watch?v=mIr1zzVvDFA)
+
 ## What it does
 
 On launch, it fetches a small bitmap image and a short sound effect from
