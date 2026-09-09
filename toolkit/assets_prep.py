@@ -15,14 +15,14 @@ from PIL import Image
 from toolkit.animator import play_animation_sequence
 
 TERMINAL_WIDTH, _ = shutil.get_terminal_size()
-panera_logo_bitmap_remote = ('https://raw.githubusercontent.com/Kaz95/SchoolAssignments/refs/heads/master'
+panera_logo_bitmap_remote = ('https://github.com/Kaz95/stdlib-only-toolkit/blob/master/assets/generated'
                              '/panera_logo_bitmap.json')
 TARGET_HEIGHT = 100
 TARGET_WIDTH = 100
 
 
 def extract_bitmap():
-    img = Image.open(r'../assets/source_images/Panera-Bread-Logo-cropped-squared.png')
+    img = Image.open('../assets/source_images/Panera-Bread-Logo-cropped-squared.png')
     img = img.convert('RGB')
     width, height = img.size
 
