@@ -173,54 +173,6 @@ class Drawing:
         return uinput
 
 
-# First time actually finding a solid use case for a MetaClass!
-class PadZeroMeta(type):
-    """EmojiUnicodes Metaclass."""
-
-    # Trying to add this to class or references just about any way other than class level static method causes recursion
-    # I mostly understand why, but I need to look into it more. TODO: Fully understand class lookup.
-    @staticmethod
-    def fill_emoji_unicode(emoji: str) -> str:
-        """Pad emoji strings with correct amount of '0's."""
-        split_emoji = emoji.split(r'\u')
-        padded_code = rf'\U{split_emoji[0]:0>8}'
-
-        if len(split_emoji) > 1:
-            padded_code = padded_code + rf'\u{split_emoji[1]}'
-
-        # Learned some cool stuff about run-time vs compilation.
-        # Need to manually decode. Dynamic string isn't available at compile time, and isn't recognized as an ANSI escape.
-        emoji = padded_code.encode('utf-8').decode('unicode_escape')
-        return emoji
-
-    def __getattribute__(self, name: str):
-        value = super().__getattribute__(name)
-
-        # Block dunder methods.
-        if name.startswith('__') and name.endswith('__'):
-            return value
-        else:
-            new_val = PadZeroMeta.fill_emoji_unicode(value)
-            return new_val
-
-
-class EmojiUnicodes(metaclass=PadZeroMeta):
-    """Emoji Unicode string constants."""
-    blood = '1FA78'
-    clock = r'1F570\uFE0F'
-    programmer = '1F4BE'
-    computer = r'1F5A5\uFE0F'
-    fish = '1F3A3'
-    baseball = '26BE'
-    joystick = r'1F579\uFE0F'
-    planet = '1F30C'
-    robot = '1F916'
-    book = '1F4D6'
-    thanks = '1F64F'
-    alien = '1F47D'
-    bread = '1F35E'
-    flat_bread = '1FAD3'
-
 
 class TipCalc:
     """Core business logic. Gather user input based on context and draw UI."""
@@ -283,6 +235,13 @@ CHANNELS = 2
 SAMPLE_WIDTH = 2
 SAMPLE_RATE = 44100
 
+# # ANSI escapes
+# RESET = "\x1b[0m"
+# CURSOR_TO_TOP = "\x1b[H"  # Moves text cursor to 0,0 without clearing screen
+# CLEAR_SCREEN = "\x1b[2J"  # Completely clears the terminal buffer once
+# HIDE_CURSOR = "\x1b[?25l"  # Hides flashing text terminal bar
+# SHOW_CURSOR = "\x1b[?25h"  # Restores terminal cursor state
+
 
 def load_bitmap(remote_bitmap):
     with urllib.request.urlopen(remote_bitmap) as response:
@@ -298,22 +257,8 @@ def lerp(starting_color, target_color, progress):
     return r, g, b
 
 
-def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
-    """This function is super inefficient. I realized this as a result of trying to run it in online environments.
-
-    There is a massive amount of data being pushed. I think online tools are I/O bottle knecked on the networking
-    side of things. I also believe most online editors are running inside a docker container at this point, and only
-    allocated a very small amount of resources. I wouldn't be surprised if the containers are also throttled depending on
-    work load. I could attempt to make it more efficient(the nested loop is O(n^2) I think), but the real solution
-    is to run it locally. If I were trying to get it to run online, I'd start by only sending a new ANSI color code
-    when a pixel has a different color from the previous. I think this would significantly reduce the overall payload.
-    I should probably also append the reset and newline escapes to the line buffer list to avoid string concatenation
-    all together. Appending to end of a list is O(1) constant time, while creating a new string in a loop is O(n^2)
-    at its worst.
-    """
-    # Overwrite the previous frame by pinning cursor back to the top left corner
-    sys.stdout.write(Drawing.CURSOR_TO_TOP)
-
+def render_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
+    """Build one frame as a finished string, without writing anything."""
     height = len(bit_map)
     width = len(bit_map[0])
     if pad:
@@ -321,6 +266,8 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
         pad = ' ' * pad_length
     else:
         pad = ''
+
+    frame_lines = [Drawing.CURSOR_TO_TOP]
     for y in range(0, height, 2):
         line_buffer = [pad]
         for x in range(width):
@@ -330,7 +277,6 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
             if is_black:
                 top_rgb = lerp(TERMINAL_BLACK, original_top, progress)
                 bot_rgb = lerp(TERMINAL_BLACK, original_bottom, progress)
-
             else:
                 top_rgb = lerp(original_top, TERMINAL_BLACK, progress)
                 bot_rgb = lerp(original_bottom, TERMINAL_BLACK, progress)
@@ -340,24 +286,38 @@ def paint_a_frame(bit_map, progress, terminal_width, is_black=True, pad=False):
 
             line_buffer.append(f"{bg_ansi}{fg_ansi}{Drawing.lower_block}")
 
-        sys.stdout.write("".join(line_buffer) + Drawing.RESET + "\n")
-    sys.stdout.flush()
+        frame_lines.append("".join(line_buffer) + Drawing.RESET)
+
+    return "\n".join(frame_lines) + "\n"
+
+
+def precompute_interpolation_frames(bit_map, terminal_width, steps):
+    """Render all frames of the animation in advance and store them in a list."""
+    frames = []
+
+    for step in range(steps + 1):
+        progress = step / steps
+        frames.append(render_frame(bit_map, progress, terminal_width, is_black=True))
+
+    for step in range(steps + 1):
+        progress = step / steps
+        frames.append(render_frame(bit_map, progress, terminal_width, is_black=False))
+
+    return frames
 
 
 def play_animation_sequence(matrix, steps=60, sleep_rate=0.05):
-    # Hide interface cursor
+    frames = precompute_interpolation_frames(matrix, TERMINAL_WIDTH, steps)
+    fade_in_frame_count = steps + 1
+
     sys.stdout.write(Drawing.HIDE_CURSOR)
     sys.stdout.write(Drawing.CLEAR_SCREEN)
 
-    for step in range(steps + 1):
-        progress = step / steps
-        paint_a_frame(matrix, progress, TERMINAL_WIDTH)
-        time.sleep(sleep_rate)
+    for i, frame in enumerate(frames):
+        sys.stdout.write(frame)
+        sys.stdout.flush()
 
-    for step in range(steps + 1):
-        progress = step / steps
-        paint_a_frame(matrix, progress, TERMINAL_WIDTH, is_black=False)
-        if step == 0:
+        if i == fade_in_frame_count:
             time.sleep(3)
         else:
             time.sleep(sleep_rate)
