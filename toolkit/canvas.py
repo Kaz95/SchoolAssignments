@@ -91,61 +91,31 @@ class Drawing:
             print(cls.RESET)
 
     @classmethod
-    def draw_window(cls, bill: str | int = 0, tip: str | int = 0) -> str:
+    def draw_window(cls) -> str:
         """Draw full calculator UI, including dynamic values."""
-        print(cls.PANERA_TAN, end='')
         print(cls.CLEAR_SCREEN)
         print(cls.CURSOR_TO_TOP)
 
-        bill = float(bill)
-        tip = float(tip)
 
         print(cls.top_left + cls.horiz * 78 + cls.top_right)
-        print('Welcome to:'.center(80))
-        print()
-        Drawing.draw_word('PANERA BREAD', pad=' ' * 18)
-        print(cls.PANERA_TAN, end='')
+        print('Title'.center(80))
         print(cls.vert + cls.horiz * 78 + cls.vert)
         for _ in range(15):
 
             if _ == 0:
-                print(cls.vert + 'Gratuities'.center(38) + cls.vert + 'Bill'.center(39) + cls.vert)
+                print(cls.vert +  'Headers'.center(78) + cls.vert)
 
             elif _ == 1:
                 print(cls.vert + cls.horiz * 78 + cls.vert)
 
-            elif _ == 3:
-                print(cls.vert + f'A.) 15%:  ${bill * .15:04.2f}'.center(38) + cls.vert + f'Base: ${bill:04.2f}'.center(
-                    39) + cls.vert)
-
-            elif _ == 5:
-                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
-
-            elif _ == 7:
-                print(cls.vert + f'B.) 20%:  ${bill * .2:04.2f}'.center(38) + cls.vert + f'Tip: ${tip:04.2f}'.center(
-                    39) + cls.vert)
-
-            elif _ == 9:
-                print(cls.vert + cls.horiz * 38 + cls.vert + cls.horiz * 39 + cls.vert)
-
-            elif _ == 11:
-                print(cls.vert + f'C.) 25%:  ${bill * .25:04.2f}'.center(
-                    38) + cls.vert + f'Total: ${bill + tip:04.2f}'.center(39) + cls.vert)
-            elif _ == 13:
-                print(cls.vert + cls.horiz * 78 + cls.vert)
-
-            elif _ == 14:
-                if not bill:
-                    print(cls.vert + 'Enter Bill: $$ or $$.$$'.center(78) + cls.vert)
-                elif not tip:
-                    print(cls.vert + 'Enter Tip: $$ or $$.$$'.center(78) + cls.vert)
-                else:
-                    print(cls.vert + '[R]eset, [T]ip, [E]xit...'.center(78) + cls.vert)
             else:
-                print(cls.vert + cls.vert.center(78) + cls.vert)
+                print(cls.vert + ' ' * 78 + cls.vert)
 
         print(cls.bottom_left + cls.horiz * 78 + cls.bottom_right)
 
         uinput = input('? ')
         print(cls.RESET)
         return uinput
+
+if __name__ == '__main__':
+    Drawing.draw_window()
